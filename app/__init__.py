@@ -10,6 +10,13 @@ session = Session()
 app = Flask(__name__, template_folder='templates')
 
 
+from .login import app as login  # NOQA
+app.register_blueprint(login, url_prefix='/login')
+
+from .cadastro import app as cadastro  # NOQA
+app.register_blueprint(cadastro, url_prefix='/cadastro')
+
+
 session.init_app(app)
 login_manager.init_app(app)
 db.init_app(app)
