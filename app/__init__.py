@@ -1,7 +1,8 @@
 """Start flask app."""
 from flask import Flask
-from app.tabelas import db, Usuario
 from flask_login import LoginManager
+
+from .tabelas import db, Usuario
 from flask_session import Session
 
 login_manager = LoginManager()
@@ -15,6 +16,9 @@ app.register_blueprint(login, url_prefix='/login')
 
 from .cadastro import app as cadastro  # NOQA
 app.register_blueprint(cadastro, url_prefix='/cadastro')
+
+from .qr_code import app as qr_code  # NOQA
+app.register_blueprint(qr_code, url_prefix='/qr-code')
 
 
 session.init_app(app)
