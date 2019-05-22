@@ -1,15 +1,17 @@
 """Arquivo para funções utilizadas no projeto."""
 
-import pyqrcode
-from app.tabelas import Usuario, db
 from werkzeug.security import check_password_hash
 
+import pyqrcode
 
-def validar_login(user, senha):
+from .tabelas import Usuario, db
+
+
+def validar_login(nome, senha):
     """Função de validação dos dados do formulário."""
     user = db.session.query(Usuario).filter_by(
-        username=user).first()
-    return check_password_hash(user.password, senha)
+        nome=nome).first()
+    return check_password_hash(user.senha, senha)
 
 
 def gerar_uuid():
