@@ -1,10 +1,12 @@
 """Arquivo para rota de geração do Qrcode."""
 
-from app.func import gerar_qrcode, gerar_uuid
-from flask import Blueprint, redirect, render_template, request, url_for
-from flask_login import login_required, login_user
+from flask import Blueprint, render_template
 
-app = Blueprint('login', __name__)
+from flask_login import login_required
+
+from .func import gerar_qrcode, gerar_uuid
+
+app = Blueprint('qr_code', __name__)
 
 
 @app.route('/',  methods=['GET'])
