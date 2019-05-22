@@ -19,9 +19,9 @@ class Usuario(db.Model):
     __tablename__ = 'usuario'
 
     _id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(40), nullable=True)
-    senha = db.Column(db.String(20), nullable=True)
-    email = db.Column(db.String(50), nullable=True)
+    nome = db.Column(db.String, nullable=False)
+    senha = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, nullable=False)
     nivel = db.Column(db.Integer, default=0, nullable=False)
 
     def is_authenticated(self):
@@ -36,11 +36,11 @@ class Usuario(db.Model):
     def get_id(self):
         return chr(self._id)
 
-    def __init__(self, nome, senha, nivel):
+    def __init__(self, nome, senha, email, nivel):
         self.nome = nome
         self.senha = senha
+        self.email = email
         self.nivel = nivel
-        db.create_all()
 
     def __repr__(self):
         return """
@@ -70,9 +70,12 @@ class Extrato(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     transferencia = db.Column(
         db.String(300), nullable=False, default="Transferência")
-    data = db.Column(db.DateTime, nullable=False, default=db.datetime.now())
+    data = db.Column(db.DateTime, nullable=False, default=db.DATETIME)
     valor = db.Column(db.Float, nullable=False)
 
     def __repr__(self):
         return """Extrato(transferencia={}, data={}, valor={}
         """.format(self.transferencia, self.data, self.valor)
+
+
+db.create_all()
