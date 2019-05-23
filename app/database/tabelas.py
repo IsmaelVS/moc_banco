@@ -8,9 +8,10 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'teste'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+# db_url = 'sqlite:///db.sqlite'
+db_url = 'postgres://pvgugjjzwjvpil:9c7adefda7aa2f5a678de9db6b484c82d37e2c88e5d77d8525315934cb9dc974@ec2-23-21-129-125.compute-1.amazonaws.com:5432/d3kvra84jha1nf'
 
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
 
 class Usuario(db.Model):
@@ -76,6 +77,3 @@ class Extrato(db.Model):
     def __repr__(self):
         return """Extrato(transferencia={}, data={}, valor={}
         """.format(self.transferencia, self.data, self.valor)
-
-
-db.create_all()

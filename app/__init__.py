@@ -2,24 +2,28 @@
 from flask import Flask
 from flask_login import LoginManager
 
-from .tabelas import db, Usuario
+from app.database.tabelas import db, Usuario, db_url
 from flask_session import Session
 
 login_manager = LoginManager()
 session = Session()
 
-app = Flask(__name__, template_folder='templates')
+
+app = Flask(__name__, template_folder='views/templates')
 
 
-from .login import app as login  # NOQA
+from app.rotas.login import app as login  # NOQA
 app.register_blueprint(login, url_prefix='/login')
 
-from .cadastro import app as cadastro  # NOQA
+from app.rotas.cadastro import app as cadastro  # NOQA
 app.register_blueprint(cadastro, url_prefix='/cadastro')
 
-from .qr_code import app as qr_code  # NOQA
+from app.rotas.qr_code import app as qr_code  # NOQA
 app.register_blueprint(qr_code, url_prefix='/qr-code')
 
+
+app.config['SQLALCHEMY_DATABASE_URI'] = db_url
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 session.init_app(app)
 login_manager.init_app(app)

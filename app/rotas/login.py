@@ -2,10 +2,9 @@
 
 from flask import Blueprint, redirect, render_template, request, url_for
 
+from app.rotas.helpers.func import validar_login
+from app.views.form import FormUsuario
 from flask_login import login_required, login_user
-
-from .form import FormUsuario
-from .func import validar_login
 
 app = Blueprint('login', __name__)
 

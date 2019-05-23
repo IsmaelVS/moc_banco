@@ -2,9 +2,8 @@
 
 from flask import Blueprint, render_template
 
+from app.rotas.helpers.func import gerar_qrcode, gerar_uuid
 from flask_login import login_required
-
-from .func import gerar_qrcode, gerar_uuid
 
 app = Blueprint('qr_code', __name__)
 
