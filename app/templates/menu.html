@@ -1,0 +1,14 @@
+<html>
+  <fieldset>
+    <legend>Login</legend>
+    <form action="/login/checar" method=post>
+      {% for field in form %}
+        <tr>
+          <td>{{ field }}</td>
+          <br>
+        </tr>
+      {% endfor %}
+      {{form.submit}}
+    </form>
+  </fieldset>
+</html>

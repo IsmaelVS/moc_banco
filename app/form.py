@@ -19,3 +19,11 @@ class Login(Form):
     usuario = StringField('Usuario')
     senha = PasswordField('Senha')
     btn = SubmitField('Logar')
+
+
+class Menu(Form):
+    """Classe para montar o formulário."""
+
+    logar = StringField('Logar')
+    Registrar = PasswordField('Registrar')
+    Ativar = SubmitField('Ativar conta')
