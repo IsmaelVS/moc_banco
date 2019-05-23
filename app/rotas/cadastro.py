@@ -13,8 +13,6 @@ app = Blueprint('cadastro', __name__)
 
 @app.route('/')
 def home():
-    import ipdb; ipdb.set_trace()
-
     """Rota inicial, com formulário para cadastro."""
     return render_template('cadastro.html', form=FormUsuario())
 
