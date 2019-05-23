@@ -1,8 +1,9 @@
 """Arquivo para funções utilizadas no projeto."""
 
-from werkzeug.security import check_password_hash
+from datetime import datetime
 
 import pyqrcode
+from werkzeug.security import check_password_hash
 
 from .tabelas import Usuario, db
 
@@ -15,7 +16,9 @@ def validar_login(nome, senha):
 
 
 def gerar_uuid():
-    uuid = 0
+    data = datetime.now()
+    uuid = str(data.year)[-2:] + '{:d}'.format(data.month).zfill(2)
+
     return uuid
 
 
