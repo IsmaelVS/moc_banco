@@ -1,18 +1,20 @@
 <html>
   <fieldset>
-    <legend>Login</legend>
+    <legend>Menu</legend>
     <form action="/login/checar" method=post>
       {% for field in form %}
         <tr>
-          <th>{{ field.label }}</th>
           <td>{{ field }}</td>
           <br>
         </tr>
       {% endfor %}
-      {% if error %}
-        <p>Usuário ou senha incorreta</p>
-      {% endif%}
       {{form.submit}}
     </form>
   </fieldset>
 </html>
+
+<!-- {% if name %}
+  <h1>Hello {{ name }}!</h1>
+{% else %}
+  <h1>Hello, World!</h1>
+{% endif %} -->
