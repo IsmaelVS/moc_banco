@@ -32,7 +32,7 @@ def gerar_uuid(nome):
 
 def gerar_qrcode(uuid):
     code = pyqrcode.create('{}'.format(uuid))
-    code.png('{}.png'.format(uuid), scale=6)
+    code.png('../../views/static/{}.png'.format(uuid), scale=6)
 
 
 def enviar_token(email, token):
