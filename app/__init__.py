@@ -30,6 +30,9 @@ app.register_blueprint(atualizar, url_prefix='/atualizar')
 from app.rotas.ativar_cadastro import app as ativar  # NOQA
 app.register_blueprint(ativar, url_prefix='/ativar')
 
+from app.rotas.menu import app as menu  # NOQA
+app.register_blueprint(menu, url_prefix='/')
+
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 

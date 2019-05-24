@@ -1,10 +1,10 @@
-from flask import render_template
-from flask_login import login_user
+from flask import Blueprint, render_template
+from flask_login import logout_user
 
-from app import app
+app = Blueprint('menu', __name__)
 
 
 @app.route('/')
 def login_template():
-    login_user()
+    logout_user()
     return render_template('menu.html')
