@@ -26,9 +26,9 @@ def checar_cadastro():
     hashed_senha = generate_password_hash(
         request.form['senha'], method='sha256')
     email = request.form['email']
-    token = randint(10000, 99999)
-    user = Usuario(nome=nome, senha=hashed_senha, email=email, token=token)
-    enviar_token(email, token)
+    # token = randint(10000, 99999)
+    user = Usuario(nome=nome, senha=hashed_senha, email=email, token=123)
+    enviar_token(email, 123)
     db.session.add(user)
     db.session.commit()
     logout_user()
