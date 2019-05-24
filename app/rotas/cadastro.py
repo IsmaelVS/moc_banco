@@ -28,7 +28,7 @@ def checar_cadastro():
     email = request.form['email']
     # token = randint(10000, 99999)
     user = Usuario(nome=nome, senha=hashed_senha, email=email, token=123)
-    enviar_token(email, 123)
+    enviar_token(request.form['email'], '123')
     db.session.add(user)
     db.session.commit()
     logout_user()
