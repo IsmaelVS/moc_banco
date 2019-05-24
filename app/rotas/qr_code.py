@@ -14,4 +14,4 @@ app = Blueprint('qr-code', __name__)
 def login_template():
     uuid = gerar_uuid(request.form['usuario'])
     gerar_qrcode(uuid=uuid)
-    return render_template('qr_code.html', token=uuid)
+    return render_template('qr_code.html')

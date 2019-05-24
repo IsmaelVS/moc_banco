@@ -4,10 +4,10 @@
   <div class="row">
   	<div class="col-md-7 offset-md-2">
         <h1>Qr code.</h1>
-        <img src="{{ url_for('static', filename='{{ token,'.png' }}')}}"></img>
-        {% if token %}
+        <img src="{{ url_for('static', filename='cartao.png')}}"></img>
+        <!-- {% if token %}
           <h3>{{ token }}</h3>
-        {% endif%}
+        {% endif%} -->
         <form action="/adicionar-dinheiro/" method="get">
             <input type="submit" class="btn btn-block btn-success" value="Adicionar dinheiro" name="Submit"/>
         </form>
