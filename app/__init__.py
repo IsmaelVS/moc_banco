@@ -11,6 +11,8 @@ session = Session()
 
 app = Flask(__name__, template_folder='views/templates', static_folder='views/static')
 
+app.secret_key = 'super secret key'
+app.config['SESSION_TYPE'] = 'filesystem'
 
 from app.rotas.login import app as login  # NOQA
 app.register_blueprint(login, url_prefix='/login')
@@ -39,7 +41,6 @@ app.register_blueprint(adicionar_dinheiro, url_prefix='/adicionar-dinheiro')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'teste'
 
 session.init_app(app)
 login_manager.init_app(app)
