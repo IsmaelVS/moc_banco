@@ -15,4 +15,4 @@ def login_template():
     # uuid = gerar_uuid(request.form['usuario'])
     # gerar_qrcode(uuid=uuid)
     token = 564896415
-    return render_template('qr-code.html', token=token)
+    return render_template('qr_code.html', token=token)
