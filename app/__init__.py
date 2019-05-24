@@ -9,7 +9,7 @@ login_manager = LoginManager()
 session = Session()
 
 
-app = Flask(__name__, template_folder='views/templates')
+app = Flask(__name__, template_folder='views/templates', static_folder='views/static')
 
 
 from app.rotas.login import app as login  # NOQA
