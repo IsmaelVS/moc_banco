@@ -44,8 +44,7 @@ def enviar_token(email, token):
     mail.ehlo()
     mail.starttls()
     mail.login('moc.banco@gmail.com', 'mocbanco123')
-    mail.sendmail('moc.banco@gmail.com',
-                  email, content)
+    mail.sendmail('moc.banco@gmail.com', email, content)
 
 
 def adicionar_dinheiro(user, saldo):
