@@ -1,14 +1,11 @@
-<html>
-  <fieldset>
-    <legend>Login</legend>
-    <form action="/login/checar" method=post>
-      {% for field in form %}
-        <tr>
-          <td>{{ field }}</td>
-          <br>
-        </tr>
-      {% endfor %}
-      {{form.submit}}
-    </form>
-  </fieldset>
-</html>
+{% extends 'basic.jinja2' %}
+
+{% block body %}
+  <div class="row">
+  	<div class="col-md-7 offset-md-2">
+		<button type="submit" class="btn btn-block btn-success" href="login.html">Logar</button>
+        <button type="submit" class="btn btn-block btn-success" href="cadastro.html">Cadastrar</button>
+        <button type="submit" class="btn btn-block btn-success" href="ativar_cadastro.html">Ativar conta</button>
+  	</div>
+  </div>
+{% endblock %}

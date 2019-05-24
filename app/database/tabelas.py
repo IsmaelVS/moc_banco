@@ -52,6 +52,7 @@ class Conta(db.Model):
     id_extrato = db.Column(db.Integer, db.ForeignKey('extrato.id'))
     usuario = db.relationship('Usuario')
     extrato = db.relationship('Extrato')
+    saldo = db.Column(db.Float, default=0, nullable=False)
     conta = db.Column(db.Integer, nullable=False)
     status = db.Column(db.Boolean, default=True, nullable=False)
 
@@ -65,7 +66,9 @@ class Extrato(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     transferencia = db.Column(
-        db.String(300), nullable=False, default="Transferência")
+        db.Integer, nullable=False, default=1)
+    id_usuario = db.Column(db.Integer, db.ForeignKey('usuario._id'))
+    usuario = db.relationship('Usuario')
     data = db.Column(db.DateTime, nullable=False, default=db.DATETIME)
     valor = db.Column(db.Float, nullable=False)
 

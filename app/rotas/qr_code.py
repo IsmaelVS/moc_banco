@@ -12,6 +12,7 @@ app = Blueprint('qr-code', __name__)
 @app.route('/',  methods=['GET'])
 # @login_required
 def login_template():
-    uuid = gerar_uuid(request.form['usuario'])
-    gerar_qrcode(uuid=uuid)
-    return render_template('qr-code.html')
+    # uuid = gerar_uuid(request.form['usuario'])
+    # gerar_qrcode(uuid=uuid)
+    token = 564896415
+    return render_template('qr-code.html', token=token)

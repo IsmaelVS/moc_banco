@@ -2,3 +2,17 @@
   <h1>Qr code.</h1>
   <img src="/cartao.png"></img>
 </html>
+{% extends 'basic.jinja2' %}
+
+{% block body %}
+  <div class="row">
+  	<div class="col-md-7 offset-md-2">
+        <h1>Qr code.</h1>
+        <img src="/cartao.png"></img>
+        {% if token %}
+          <h3>{{ token }}</h3>
+        {% endif%}
+        <button type="submit" class="btn btn-block btn-success" href="ativar_cadastro.html">Adicionar dinheiro</button>
+  	</div>
+  </div>
+{% endblock %}
