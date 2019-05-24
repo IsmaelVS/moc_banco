@@ -26,8 +26,7 @@ def checar_cadastro():
         request.form['senha'], method='sha256')
     email = request.form['email']
     user = Usuario(nome=nome, senha=hashed_senha, email=email, nivel=0)
-    enviar_token(email, '123')
-    # import ipdb; ipdb.sset_trace()
+    # enviar_token(email, '123')
     db.session.add(user)
     db.session.commit()
     logout_user()
