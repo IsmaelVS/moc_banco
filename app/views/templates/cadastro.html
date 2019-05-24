@@ -1,20 +1,23 @@
 {% extends 'basic.jinja2' %}
 
 {% block body %}
-  <fieldset>
-    <legend>Cadastro</legend>
-    <form action = "/cadastro/checar" method = post>
-      {% for field in form %}
-        <tr>
-          <th>{{ field.label }}</th>
-          <td>{{ field }}</td>
-          <br>
-        </tr>
-      {% endfor %}
-      {% if error %}
-        <p>Usuário já existente</p>
-      {% endif%}
-      {{form.submit}}
-    </form>
-  </fieldset>
+  <div class="row">
+  	<div class="col-md-7 offset-md-2">
+  		<form action="/teste" method=post>
+  		  <div class="form-group">
+      		<label for="nome">Nome Completo</label>
+  				<input type="text" id="nome" name	="nome" class="form-control" />
+  			</div>
+  			<div class="form-group">
+      		<label for="senha">Senha</label>
+  				<input type="password" id="senha" name="senha" class="form-control" />
+  			</div>
+  			<div class="form-group">
+      		<label for="email">E-mail</label>
+  				<input type="text" id="email" name="email" class="form-control" />
+  			</div>
+  			<button type="submit" class="btn btn-block btn-success">Cadastrar</button>
+  		</form>
+  	</div>
+  </div>
 {% endblock %}
