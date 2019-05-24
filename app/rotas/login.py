@@ -22,4 +22,4 @@ def check_login():
         login_user(True)
         return render_template('qr_code.html', form=FormUsuario())
         # return redirect(url_for('login.login_template'))
-    return render_template('login.html', form=FormUsuario())
+    return render_template('login.html')
