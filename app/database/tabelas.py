@@ -23,6 +23,7 @@ class Usuario(db.Model):
     nome = db.Column(db.String, nullable=False)
     senha = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
+    status = db.Column(db.Boolean, default=False, nullable=False)
     nivel = db.Column(db.Integer, default=0, nullable=False)
 
     def is_authenticated(self):
@@ -36,12 +37,6 @@ class Usuario(db.Model):
 
     def get_id(self):
         return chr(self._id)
-
-    def __init__(self, nome, senha, email, nivel):
-        self.nome = nome
-        self.senha = senha
-        self.email = email
-        self.nivel = nivel
 
     def __repr__(self):
         return """
