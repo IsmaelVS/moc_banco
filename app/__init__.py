@@ -21,6 +21,8 @@ app.register_blueprint(cadastro, url_prefix='/cadastro')
 from app.rotas.qr_code import app as qr_code  # NOQA
 app.register_blueprint(qr_code, url_prefix='/qr-code')
 
+from app.rotas.excluir import app as login  # NOQA
+app.register_blueprint(login, url_prefix='/excluir')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
