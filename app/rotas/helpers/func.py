@@ -6,7 +6,7 @@ from datetime import datetime
 import pyqrcode
 from werkzeug.security import check_password_hash
 
-from app.database.tabelas import Usuario, db
+from app.database.tabelas import Conta, Usuario, db
 
 
 def validar_login(nome, senha):
@@ -42,3 +42,15 @@ def enviar_token(email, token):
     mail.login('ismael.venturadasilva0@gmail.com', 'password')
     mail.sendmail('ismael.ventiradasilva0@gmail.com',
                   'ismael.venturadasilva0@gmail.com', content)
+
+
+def adicionar_dinheiro(user, saldo):
+    conta = Conta.query.filter_by(usuario=user).first()
+    conta.saldo += saldo
+    db.add(conta)
+    db.commit()
+    return conta
+
+
+def consulta_saldo(user):
+    return Conta.query.filter_by(usuario=user).first()

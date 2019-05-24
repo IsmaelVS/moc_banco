@@ -33,6 +33,10 @@ app.register_blueprint(ativar, url_prefix='/ativar')
 from app.rotas.menu import app as menu  # NOQA
 app.register_blueprint(menu, url_prefix='/')
 
+from app.rotas.adicionar_dinheiro import app as adicionar_dinheiro  # NOQA
+app.register_blueprint(adicionar_dinheiro, url_prefix='/adicionar-dinheiro')
+
+
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
