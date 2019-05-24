@@ -8,7 +8,9 @@
         {% if token %}
           <h3>{{ token }}</h3>
         {% endif%}
-        <button type="submit" class="btn btn-block btn-success" href="ativar_cadastro.html">Adicionar dinheiro</button>
+        <form action="/adicionar-dinheiro/" method="get">
+            <input type="submit" class="btn btn-block btn-success" value="Adicionar dinheiro" name="Submit"/>
+        </form>
   	</div>
   </div>
 {% endblock %}

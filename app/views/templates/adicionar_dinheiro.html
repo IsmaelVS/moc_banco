@@ -3,7 +3,7 @@
 {% block body %}
   <div class="row">
   	<div class="col-md-7 offset-md-2">
-  		<form action="/teste" method=post>
+  		<form action="/adicionar-dinheiro/checar" method=post>
   			<div class="form-group">
       		<label for="saldo">Digite o valor desejado</label>
   				<input type="text" id="saldo" name="saldo" class="form-control" />
@@ -12,7 +12,7 @@
   		</form>
   	</div>
     <div class="">
-        Saldo em conta: R$ {{ status }}
+        Saldo em conta: R$ 00.00
     </div>
   </div>
 {% endblock %}

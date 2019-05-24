@@ -50,7 +50,3 @@ def adicionar_dinheiro(user, saldo):
     db.add(conta)
     db.commit()
     return conta
-
-
-def consulta_saldo(user):
-    return Conta.query.filter_by(usuario=user).first()
