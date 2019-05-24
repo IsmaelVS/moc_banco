@@ -3,9 +3,15 @@
 {% block body %}
   <div class="row">
   	<div class="col-md-7 offset-md-2">
-		<button type="submit" class="btn btn-block btn-success" href="/login/">Logar</button>
-        <button type="submit" class="btn btn-block btn-success" href="/cadastro/">Cadastrar</button>
-        <button type="submit" class="btn btn-block btn-success" href="/ativar/">Ativar conta</button>
+        <form action="/login/" method="get">
+            <input type="submit" class="btn btn-block btn-success" value="Logar" name="Submit"/>
+        </form>
+        <form action="/cadastro/" method="get">
+            <input type="submit" class="btn btn-block btn-success" value="Cadastrar" name="Submit"/>
+        </form>
+        <form action="/ativar/" method="get">
+            <input type="submit" class="btn btn-block btn-success" value="Ativar conta" name="Submit"/>
+        </form>
   	</div>
   </div>
 {% endblock %}
