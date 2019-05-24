@@ -27,7 +27,7 @@ app.register_blueprint(excluir, url_prefix='/excluir')
 from app.rotas.atualizar import app as atualizar  # NOQA
 app.register_blueprint(atualizar, url_prefix='/atualizar')
 
-from app.rotas.ativar import app as ativar  # NOQA
+from app.rotas.ativar_cadastro import app as ativar  # NOQA
 app.register_blueprint(ativar, url_prefix='/ativar')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
