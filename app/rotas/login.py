@@ -18,8 +18,8 @@ def login_template():
 def check_login():
     """Rota para validar dados do formulário."""
     # import ipdb; ipdb.sset_trace()
-    if validar_login(request.form['nome'], request.form['senha']):
-        # login_user(True)
-        return render_template('qr_code.html', form=FormUsuario())
-        # return redirect(url_for('login.login_template'))
+    result = validar_login(request.form['nome'], request.form['senha'])
+    if result:
+        login_user(result)
+        return render_template('qr_code.html')
     return render_template('login.html')

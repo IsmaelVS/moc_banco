@@ -13,7 +13,10 @@ def validar_login(nome, senha):
     """Função de validação dos dados do formulário."""
     user = db.session.query(Usuario).filter_by(
         nome=nome).first()
-    return check_password_hash(user.senha, senha)
+    check_pwd = check_password_hash(user.senha, senha)
+    if check_pwd:
+        return user
+    return False
 
 
 def gerar_uuid(nome):
@@ -50,3 +53,7 @@ def adicionar_dinheiro(user, saldo):
     db.add(conta)
     db.commit()
     return conta
+
+
+def consulta_saldo(user):
+    return Conta.query.filter_by(usuario=user).first()
