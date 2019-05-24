@@ -6,6 +6,7 @@ from flask_login import logout_user
 from werkzeug.security import generate_password_hash
 
 from app.database.tabelas import Usuario, db
+from app.rotas.helpers.func import enviar_token
 from app.views.form import FormUsuario, Login
 
 app = Blueprint('cadastro', __name__)
@@ -25,6 +26,7 @@ def checar_cadastro():
         request.form['senha'], method='sha256')
     email = request.form['email']
     user = Usuario(nome=nome, senha=hashed_senha, email=email, nivel=0)
+    enviar_token(email, '123')
     # import ipdb; ipdb.sset_trace()
     db.session.add(user)
     db.session.commit()
