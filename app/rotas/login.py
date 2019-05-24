@@ -11,7 +11,7 @@ app = Blueprint('login', __name__)
 
 @app.route('/',  methods=['GET'])
 def login_template():
-    return render_template('user_index.html')
+    return render_template('login.html')
 
 
 @app.route('/checar', methods=['POST'])
