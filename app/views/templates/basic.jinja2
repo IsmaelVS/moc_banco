@@ -23,12 +23,12 @@
             <ul class="navbar-nav mr-auto"></ul>
             <div class="form-inline my-2 my-lg-0">
                 {% if not current_user %}
-                <a class="btn btn-dark my-2 my-sm-0 text-white" href="login.html">Acessar</a>
+                <a class="btn btn-dark my-2 my-sm-0 text-white" href="/login/">Acessar</a>
                 {% else %}
                 <a class="nav-link" href="#">
                   <i class="fas fa-user"></i> {{ current_user.nome }}
                 </a>
-                <a class="btn btn-dark my-2 my-sm-0 text-white" href="menu.html">Sair</a>
+                <a class="btn btn-dark my-2 my-sm-0 text-white" href="/">Sair</a>
                 {% endif %}
             </div>
         </div>
