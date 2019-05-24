@@ -9,7 +9,7 @@ def home():
     return render_template('ativar_cadastro.html')
 
 
-@app.route('/checar_ativacao', methods=['POST'])
+@app.route('/checar-ativacao')
 def checar_cadastro():
     """Rota para checar cadastro."""
     return render_template('qr_code.html')
