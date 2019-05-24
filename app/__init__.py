@@ -24,6 +24,9 @@ app.register_blueprint(qr_code, url_prefix='/qr-code')
 from app.rotas.excluir import app as excluir  # NOQA
 app.register_blueprint(excluir, url_prefix='/excluir')
 
+from app.rotas.atualizar import app as atualizar  # NOQA
+app.register_blueprint(atualizar, url_prefix='/atualizar')
+
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
