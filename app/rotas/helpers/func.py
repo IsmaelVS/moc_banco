@@ -1,3 +1,4 @@
+# coding: utf-8
 """Arquivo para funções utilizadas no projeto."""
 
 import smtplib
