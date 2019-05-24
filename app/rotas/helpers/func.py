@@ -4,8 +4,9 @@ import smtplib
 from datetime import datetime
 
 import pyqrcode
-from app.database.tabelas import Usuario, db
 from werkzeug.security import check_password_hash
+
+from app.database.tabelas import Usuario, db
 
 
 def validar_login(nome, senha):
@@ -20,7 +21,7 @@ def gerar_uuid(nome):
         nome=nome).first()
     data = datetime.now()
     uuid = str(data.year)[-2:] + '{:d}'.format(data.month).zfill(2)
-    n_id = 1 if 101 > user._id > 1 else 2 if 1001 > user._id > 100 else 3'{:d}'.format(data.month).zfill(9)
+    n_id = 1 if 101 > user._id > 1 else 2 if 1001 > user._id > 100 else 3
     id = '{:d}'.format(user._id).zfill(9)
 
     return uuid + n_id + id

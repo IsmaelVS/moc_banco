@@ -2,11 +2,11 @@
 """Arquivo de rota de cadastro."""
 
 from flask import Blueprint, render_template, request
+from flask_login import logout_user
 from werkzeug.security import generate_password_hash
 
 from app.database.tabelas import Usuario, db
 from app.views.form import FormUsuario, Login
-from flask_login import logout_user
 
 app = Blueprint('cadastro', __name__)
 
