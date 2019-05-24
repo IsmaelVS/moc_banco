@@ -23,6 +23,7 @@ class Usuario(db.Model):
     email = db.Column(db.String, nullable=False)
     status = db.Column(db.Boolean, default=False, nullable=False)
     nivel = db.Column(db.Integer, default=0, nullable=False)
+    token = db.Column(db.Integer, default=0, nullable=False)
 
     def is_authenticated(self):
         return True
@@ -38,8 +39,8 @@ class Usuario(db.Model):
 
     def __repr__(self):
         return """
-        Usuario(nome={}, senha={}, nivel={}, status={}, nivel={})""".format(
-            self.nome, self.senha, self.nivel, self.status, self.nivel)
+        Usuario(nome={}, senha={}, nivel={}, status={}, nivel={}, token={})""".format(
+            self.nome, self.senha, self.nivel, self.status, self.nivel, self.token)
 
 
 class Conta(db.Model):

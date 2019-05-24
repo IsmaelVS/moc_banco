@@ -36,15 +36,15 @@ def gerar_qrcode(uuid):
 
 
 def enviar_token(email, token):
-    content = """Token para ativação da sua conta.\n\n
+    content = """Token para ativação da sua conta no banco MOC.\n\n
         Código de ativação: {}\n
         Acesse: http://moc-banco.herokuapp.com/ativar-cadastro""".format(token)
     mail = smtplib.SMTP('smtp.gmail.com', 587)
     mail.ehlo()
     mail.starttls()
-    mail.login('ismael.venturadasilva0@gmail.com', 'password')
-    mail.sendmail('ismael.ventiradasilva0@gmail.com',
-                  'ismael.venturadasilva0@gmail.com', content)
+    mail.login('moc.banco@gmail.com', 'mocbanco123')
+    mail.sendmail('moc.banco@gmail.com',
+                  email, content)
 
 
 def adicionar_dinheiro(user, saldo):

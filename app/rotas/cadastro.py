@@ -8,6 +8,7 @@ from werkzeug.security import generate_password_hash
 from app.database.tabelas import Usuario, db
 from app.rotas.helpers.func import enviar_token
 from app.views.form import FormUsuario, Login
+from random import randint
 
 app = Blueprint('cadastro', __name__)
 
@@ -25,8 +26,9 @@ def checar_cadastro():
     hashed_senha = generate_password_hash(
         request.form['senha'], method='sha256')
     email = request.form['email']
-    user = Usuario(nome=nome, senha=hashed_senha, email=email)
-    # enviar_token(email, '123')
+    token = randint(10000, 99999)
+    user = Usuario(nome=nome, senha=hashed_senha, email=email, token=token)
+    enviar_token(email, token)
     db.session.add(user)
     db.session.commit()
     logout_user()
