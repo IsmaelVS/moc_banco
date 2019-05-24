@@ -40,8 +40,8 @@ class Usuario(db.Model):
 
     def __repr__(self):
         return """
-        Usuario(nome={}, senha={}, nivel={})""".format(
-            self.nome, self.senha, self.nivel)
+        Usuario(nome={}, senha={}, nivel={}, status={}, nivel={})""".format(
+            self.nome, self.senha, self.nivel, self.status, self.nivel)
 
 
 class Conta(db.Model):
@@ -54,11 +54,10 @@ class Conta(db.Model):
     extrato = db.relationship('Extrato')
     saldo = db.Column(db.Float, default=0, nullable=False)
     conta = db.Column(db.Integer, nullable=False)
-    status = db.Column(db.Boolean, default=True, nullable=False)
 
     def __repr__(self):
-        return """Conta(usuario={}, extrato={}, conta={}, status={})
-        """.format(self.usuario, self.extrato, self.conta, self.status)
+        return """Conta(usuario={}, extrato={}, conta={})
+        """.format(self.usuario, self.extrato, self.conta)
 
 
 class Extrato(db.Model):
