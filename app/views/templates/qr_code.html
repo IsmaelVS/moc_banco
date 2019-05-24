@@ -4,7 +4,7 @@
   <div class="row">
   	<div class="col-md-7 offset-md-2">
         <h1>Qr code.</h1>
-        <img src="{{ url_for('static', filename='{{ token }}.png')}}"></img>
+        <img src="{{ url_for('static', filename='{{ token + '.png' }}')}}"></img>
         {% if token %}
           <h3>{{ token }}</h3>
         {% endif%}
