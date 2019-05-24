@@ -1,16 +1,14 @@
 """Arquivo para rota de login."""
 
-from flask import Blueprint, redirect, render_template, request, url_for
-
 from app.rotas.helpers.func import validar_login
 from app.views.form import FormUsuario
+from flask import Blueprint, render_template, request
 from flask_login import login_required, login_user
 
 app = Blueprint('login', __name__)
 
 
 @app.route('/',  methods=['GET'])
-@login_required
 def login_template():
     return render_template('user_index.html')
 
@@ -21,5 +19,6 @@ def check_login():
     # import ipdb; ipdb.sset_trace()
     if validar_login(request.form['usuario'], request.form['senha']):
         login_user(True)
-        return redirect(url_for('login.login_template'))
+        return render_template('qr_code.html', form=FormUsuario())
+        # return redirect(url_for('login.login_template'))
     return render_template('login.html', form=FormUsuario(), error=True)

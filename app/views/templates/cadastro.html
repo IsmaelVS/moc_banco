@@ -1,4 +1,6 @@
-<html>
+{% extends 'basic.jinja2' %}
+
+{% block body %}
   <fieldset>
     <legend>Cadastro</legend>
     <form action = "/cadastro/checar" method = post>
@@ -15,4 +17,4 @@
       {{form.submit}}
     </form>
   </fieldset>
-</html>
+{% endblock %}

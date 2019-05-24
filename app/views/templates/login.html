@@ -1,4 +1,6 @@
-<html>
+{% extends 'basic.jinja2' %}
+
+{% block body %}
   <fieldset>
     <legend>Menu</legend>
     <form action="/login/checar" method=post>
@@ -11,7 +13,7 @@
       {{form.submit}}
     </form>
   </fieldset>
-</html>
+{% endblock %}
 
 <!-- {% if name %}
   <h1>Hello {{ name }}!</h1>
