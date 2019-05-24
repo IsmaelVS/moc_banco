@@ -31,4 +31,4 @@ def checar_cadastro():
     db.session.add(user)
     db.session.commit()
     logout_user()
-    return render_template('login.html', form=Login())
+    return render_template('login.html')
