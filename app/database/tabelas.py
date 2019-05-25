@@ -39,8 +39,8 @@ class Usuario(db.Model):
 
     def __repr__(self):
         return """
-        Usuario(nome={}, senha={}, nivel={}, status={}, nivel={}, token={})""".format(
-            self.nome, self.senha, self.nivel, self.status, self.nivel, self.token)
+        Usuario(nome={}, senha={}, nivel={}, status={}, token={})""".format(
+            self.nome, self.senha, self.nivel, self.status, self.token)
 
 
 class Conta(db.Model):

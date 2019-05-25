@@ -37,7 +37,7 @@ def gerar_qrcode(uuid):
 
 
 def enviar_token(email, token):
-    content = """Token para ativação da sua conta no banco MOC.\n\n
+    content = """Token para ativacao da sua conta no banco MOC.\n\n
         Codigo de ativacao: {}\n
         Acesse: http://moc-banco.herokuapp.com/ativar-cadastro""".format(token)
     mail = smtplib.SMTP('smtp.gmail.com', 587)
