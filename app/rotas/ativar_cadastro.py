@@ -12,7 +12,7 @@ def home():
 
 
 @app.route('/checar-ativacao')
-def checar_cadastro():
+def ativar_cadastro():
     """Rota para checar cadastro."""
     # Conta.query.filter_by(nome=request.form['email']).first()
     return render_template('qr_code.html')

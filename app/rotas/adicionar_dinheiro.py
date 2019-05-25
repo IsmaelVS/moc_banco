@@ -8,7 +8,7 @@ app = Blueprint('adicionar-dinheiro', __name__)
 
 @app.route('/')
 @login_required
-def home():
+def adicionar_dinheiro():
     """Rota com formulário para validar cadastro."""
     saldo_total = consulta_saldo(current_user)
     return render_template('adicionar_dinheiro.html', status=saldo_total.saldo)
@@ -16,7 +16,7 @@ def home():
 
 @app.route('/checar', methods=['POST'])
 @login_required
-def checar_cadastro():
+def checar_adicao():
     """Rota para checar cadastro."""
     saldo = request.form.get('saldo')
     result = adicionar_dinheiro(current_user, float(saldo))

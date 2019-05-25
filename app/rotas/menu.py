@@ -5,6 +5,6 @@ app = Blueprint('menu', __name__)
 
 
 @app.route('/')
-def login_template():
+def menu():
     logout_user()
     return render_template('menu.html')
