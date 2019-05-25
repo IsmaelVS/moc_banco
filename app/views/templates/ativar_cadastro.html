@@ -3,7 +3,11 @@
 {% block body %}
   <div class="row">
   	<div class="col-md-7 offset-md-2">
-  		<form action="/teste" method=post>
+			<form action="/teste" method=post>
+				<div class="form-group">
+      		<label for="email">Digite seu e-mail</label>
+  				<input type="text" id="email" name="email" class="form-control" />
+  			</div>
   			<div class="form-group">
       		<label for="token">Digite o token recebido</label>
   				<input type="text" id="token" name="token" class="form-control" />
