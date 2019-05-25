@@ -6,8 +6,8 @@ from flask_login import logout_user
 from werkzeug.security import generate_password_hash
 
 from app.database.tabelas import Usuario, db
-from app.rotas.helpers.func import enviar_token
-from app.views.form import FormUsuario, Login
+from app.rotas.helpers.func import enviar_token, checar_email_existente
+from app.views.form import Login
 from random import randint
 
 app = Blueprint('cadastro', __name__)
@@ -16,7 +16,7 @@ app = Blueprint('cadastro', __name__)
 @app.route('/')
 def home():
     """Rota inicial, com formulário para cadastro."""
-    return render_template('cadastro.html', form=FormUsuario())
+    return render_template('cadastro.html')
 
 
 @app.route('/checar', methods=['POST'])
@@ -27,9 +27,11 @@ def checar_cadastro():
         request.form['senha'], method='sha256')
     email = request.form['email']
     token = randint(10000, 99999)
+    if checar_email_existente(email):
+        return render_template('cadastro.html', user=True)
     user = Usuario(nome=nome, senha=hashed_senha, email=email, token=token)
     enviar_token(email, token)
     db.session.add(user)
     db.session.commit()
     logout_user()
-    return render_template('login.html', form=FormUsuario())
+    return render_template('login.html')
