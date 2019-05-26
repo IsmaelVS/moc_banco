@@ -2,15 +2,21 @@
 
 {% block body %}
   <div class="row">
-  	<div class="col-md-7 offset-md-2">
+  	<div class="col-md-7 offset-md-2" align="center">
         <h1>Qr code.</h1>
-        <img src="{{ url_for('static', filename='cartao.png')}}"></img>
-        <!-- {% if token %}
+        <img src="/static/{{ img }}"></img>
+        {% if token %}
           <h3>{{ token }}</h3>
-        {% endif%} -->
-        <form action="/adicionar-dinheiro/" method="get">
+        {% endif%}
+        <form action="/adicionar-dinheiro" method="get">
             <input type="submit" class="btn btn-block btn-success" value="Adicionar dinheiro" name="Submit"/>
+        </form><br>
+        <form action="/transferencia" method="get">
+            <input type="submit" class="btn btn-block btn-success" value="Transferir dinheiro" name="Submit"/>
         </form>
+        {% if sem_saldo %}
+          <h6>Saldo indisponível.</h6>
+        {% endif%}
   	</div>
   </div>
 {% endblock %}

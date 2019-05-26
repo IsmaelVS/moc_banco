@@ -1,14 +1,13 @@
 # coding: utf-8
 """Arquivo de rota de cadastro."""
 
+from random import randint
+
+from app.database.tabelas import Usuario, db
+from app.rotas.helpers.func import checar_email_existente, enviar_token
 from flask import Blueprint, render_template, request
 from flask_login import logout_user
 from werkzeug.security import generate_password_hash
-
-from app.database.tabelas import Usuario, db
-from app.rotas.helpers.func import enviar_token, checar_email_existente
-from app.views.form import Login
-from random import randint
 
 app = Blueprint('cadastro', __name__)
 
@@ -16,6 +15,7 @@ app = Blueprint('cadastro', __name__)
 @app.route('/')
 def home():
     """Rota inicial, com formulário para cadastro."""
+    logout_user()
     return render_template('cadastro.html')
 
 
@@ -34,4 +34,4 @@ def checar_cadastro():
     db.session.add(user)
     db.session.commit()
     logout_user()
-    return render_template('login.html')
+    return render_template('ativar_cadastro.html')

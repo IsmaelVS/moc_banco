@@ -1,7 +1,7 @@
+from app.database.tabelas import Conta
+from app.rotas.helpers.func import adic_dinheiro, consulta_saldo
 from flask import Blueprint, render_template, request
 from flask_login import current_user, login_required
-
-from app.rotas.helpers.func import adicionar_dinheiro, consulta_saldo
 
 app = Blueprint('adicionar-dinheiro', __name__)
 
@@ -10,8 +10,9 @@ app = Blueprint('adicionar-dinheiro', __name__)
 @login_required
 def adicionar_dinheiro():
     """Rota com formulário para validar cadastro."""
-    saldo_total = consulta_saldo(current_user)
-    return render_template('adicionar_dinheiro.html', status=saldo_total.saldo)
+    email = current_user.email
+    saldo_total = consulta_saldo(email)
+    return render_template('adicionar_dinheiro.html', saldo=saldo_total.saldo)
 
 
 @app.route('/checar', methods=['POST'])
@@ -19,5 +20,9 @@ def adicionar_dinheiro():
 def checar_adicao():
     """Rota para checar cadastro."""
     saldo = request.form.get('saldo')
-    result = adicionar_dinheiro(current_user, float(saldo))
-    return render_template('qr_code.html', status=result)
+    email = current_user.email
+    conta = Conta.query.filter_by(email=email).first()
+    adic_dinheiro(email, float(saldo))
+    return render_template(
+        'qr_code.html', token=conta.conta,
+        img='{}.png'.format(conta.conta))

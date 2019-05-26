@@ -11,8 +11,6 @@ session = Session()
 
 app = Flask(__name__, template_folder='views/templates', static_folder='views/static')
 
-app.secret_key = 'super secret key'
-app.config['SESSION_TYPE'] = 'filesystem'
 
 from app.rotas.login import app as login  # NOQA
 app.register_blueprint(login, url_prefix='/login')
@@ -38,6 +36,11 @@ app.register_blueprint(menu, url_prefix='/')
 from app.rotas.adicionar_dinheiro import app as adicionar_dinheiro  # NOQA
 app.register_blueprint(adicionar_dinheiro, url_prefix='/adicionar-dinheiro')
 
+from app.rotas.transferencia import app as transferencia  # NOQA
+app.register_blueprint(transferencia, url_prefix='/transferencia')
+
+app.secret_key = b'\x89\x03\xf4\xdc\x1a\x95f\xe0\xae!\xf6Ml\xc6\x03\xc4'
+app.config['SESSION_TYPE'] = 'filesystem'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
