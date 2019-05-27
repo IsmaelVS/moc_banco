@@ -3,11 +3,12 @@
 
 from random import randint
 
-from app.database.tabelas import Usuario, db
-from app.rotas.helpers.func import checar_email_existente, enviar_token
 from flask import Blueprint, render_template, request
 from flask_login import logout_user
 from werkzeug.security import generate_password_hash
+
+from app.database.tabelas import Usuario, db
+from app.rotas.helpers.func import checar_email_existente, enviar_token
 
 app = Blueprint('cadastro', __name__)
 

@@ -3,10 +3,14 @@
 {% block body %}
   <div class="row">
   	<div class="col-md-7 offset-md-2"></br>
-        <form action="/login/" method="get">
+        <!-- {% if excluir %} -->
+    		<form action="/cadastro/checar" method=post>
+        <!-- {% else %} -->
+        <!-- <form action="/excluir/" method="get"> -->
+        <!-- {% endif %} -->
             <input type="submit" class="btn btn-block btn-success" value="Logar" name="Submit"/>
         </form>
-        <form action="/cadastro/" method="get"></br>
+        <form action="/nivel/" method="get"></br>
             <input type="submit" class="btn btn-block btn-success" value="Cadastrar" name="Submit"/>
         </form>
         <form action="/ativar/" method="get"></br>
