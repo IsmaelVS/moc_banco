@@ -9,9 +9,9 @@ RUN apt-get update -y && apt-get upgrade -y && apt-get install -y vim
 
 # ----------//cria o usuario e o database do postgres//--------------
 
-ENV POSTGRES_USER
-ENV POSTGRES_PASSWORD
-ENV POSTGRES_DB 
+ENV POSTGRES_USER mocbanco
+ENV POSTGRES_PASSWORD mocbanco123
+ENV POSTGRES_DB mocbanco_db
 
 # ----------//inicializa o banco de dados//--------------
 
