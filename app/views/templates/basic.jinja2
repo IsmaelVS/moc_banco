@@ -13,7 +13,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="menu.html">MOC</a>
+        <a class="navbar-brand" href="/">MOC</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -22,10 +22,10 @@
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav mr-auto"></ul>
             <div class="form-inline my-2 my-lg-0">
-                {% if not current_user %}
+                {% if not current_user.nome %}
                 <a class="btn btn-dark my-2 my-sm-0 text-white" href="/login/">Acessar</a>
                 {% else %}
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/qr-code/">
                   <i class="fas fa-user"></i> {{ current_user.nome }}
                 </a>
                 <a class="btn btn-dark my-2 my-sm-0 text-white" href="/">Sair</a>

@@ -3,9 +3,9 @@
 {% block body %}
   <div class="row">
   	<div class="col-md-7 offset-md-2">
-      {% if current_user.nivel == 0 %}
+      {% if nivel == 0 %}
   		<form action="/cadastro/checar" method=post>
-      {% elif current_user.nivel == 1 %}
+      {% elif nivel == 1 %}
       <form action="/cadastro-credenciado/checar" method=post>
       {% else %}
       <form action="/cadastro-adm/checar" method=post>

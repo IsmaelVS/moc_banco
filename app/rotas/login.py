@@ -1,15 +1,16 @@
 """Arquivo para rota de login."""
 
+from flask import Blueprint, render_template, request
+from flask_login import login_user, logout_user
+
 from app import Usuario
 from app.database.tabelas import Conta
 from app.rotas.helpers.func import validar_login
-from flask import Blueprint, render_template, request
-from flask_login import login_user, logout_user
 
 app = Blueprint('login', __name__)
 
 
-@app.route('/',  methods=['GET'])
+@app.route('/')
 def login_template():
     logout_user()
     return render_template('login.html')
