@@ -13,7 +13,11 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        {% if not current_user.nome %}
         <a class="navbar-brand" href="/">MOC</a>
+        {% else %}
+        <a class="navbar-brand" href="javascript:void(0)" onClick="history.go(-1); return false;">MOC</a>
+        {% endif %}
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
