@@ -39,6 +39,15 @@ app.register_blueprint(adicionar_dinheiro, url_prefix='/adicionar-dinheiro')
 from app.rotas.transferencia import app as transferencia  # NOQA
 app.register_blueprint(transferencia, url_prefix='/transferencia')
 
+from app.rotas.niveis import app as nivel  # NOQA
+app.register_blueprint(nivel, url_prefix='/nivel')
+
+from app.rotas.cadastro_credenciado import app as cadastro_credenciado  # NOQA
+app.register_blueprint(cadastro_credenciado, url_prefix='/cadastro-credenciado')
+
+from app.rotas.cadastro_adm import app as cadastro_adm  # NOQA
+app.register_blueprint(cadastro_adm, url_prefix='/cadastro-adm')
+
 app.secret_key = b'\x89\x03\xf4\xdc\x1a\x95f\xe0\xae!\xf6Ml\xc6\x03\xc4'
 app.config['SESSION_TYPE'] = 'filesystem'
 
