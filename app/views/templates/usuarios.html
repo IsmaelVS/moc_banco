@@ -7,31 +7,29 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Id</th>
             <th>Nome</th>
             <th>Email</th>
             <th>Status</th>
             <th>Nível</th>
+            <th>Editar</th>
           </tr>
         </thead>
         <tbody>
           {% for pessoa in pessoas %}
           <tr>
-            <td>{{ usuario._id }}</td>
             <td>{{ usuario.nome }}</td>
             <td>{{ usuario.email }}</td>
             <td>{{ usuario.status }}</td>
             <td>{{ usuario.nivel }}</td>
             <td>
-							<a class="btn btn-danger btn-sm">
-								<i class="fa fa-trash text-white" aria-hidden="true"></i>
-							</a>
+    			<a class="btn btn-danger btn-sm">
+    		        <i class="fa fa-trash text-white" aria-hidden="true">[/]</i>
+    			</a>
             </td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
-
   </div>
 </div>
 {% endblock %}
