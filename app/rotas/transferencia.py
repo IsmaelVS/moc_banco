@@ -1,3 +1,5 @@
+"""Arquivo para realizar transferência."""
+
 from app.database.tabelas import Conta
 from app.rotas.helpers.func import tranferir_dinheiro
 from flask import Blueprint, render_template, request
@@ -9,14 +11,14 @@ app = Blueprint('transferencia', __name__)
 @app.route('/')
 @login_required
 def transferir_dinheiro():
-    """Rota com formulário para validar cadastro."""
+    """Rota para realizar transferência."""
     return render_template('transferencia.html')
 
 
 @app.route('/checar', methods=['POST'])
 @login_required
 def checar_transferencia():
-    """Rota para checar cadastro."""
+    """Rota para checar transferência."""
     valor = request.form.get('valor')
     conta2 = request.form.get('conta')
     email = current_user.email

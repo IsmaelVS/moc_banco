@@ -12,13 +12,14 @@ app = Blueprint('login', __name__)
 
 @app.route('/')
 def login_template():
+    """Rota para realizar login."""
     logout_user()
     return render_template('login.html')
 
 
 @app.route('/checar', methods=['POST'])
 def check_login():
-    """Rota para validar dados do formulário."""
+    """Rota para validar login."""
     result = validar_login(request.form['nome'], request.form['senha'])
     user = Usuario.query.filter_by(nome=request.form['nome']).first()
     email = user.email

@@ -1,5 +1,5 @@
 # coding: utf-8
-"""Arquivo de rota de cadastro."""
+"""Arquivo de rota de cadastro de administrador."""
 
 from random import randint
 
@@ -15,14 +15,14 @@ app = Blueprint('cadastro-adm', __name__)
 
 @app.route('/')
 def home():
-    """Rota inicial, com formulário para cadastro."""
+    """Rota inicial para cadastro de administrador."""
     logout_user()
     return render_template('cadastro.html', nivel=2)
 
 
 @app.route('/checar', methods=['POST'])
 def checar_cadastro():
-    """Rota para checar cadastro."""
+    """Rota inicial para checar cadastro de administrador."""
     nome = request.form['nome']
     hashed_senha = generate_password_hash(
         request.form['senha'], method='sha256')

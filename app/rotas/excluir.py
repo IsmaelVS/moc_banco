@@ -1,3 +1,5 @@
+"""Arquivo para excluir usuário."""
+
 from app.database.tabelas import Usuario, db
 from flask import Blueprint, render_template
 from flask_login import login_required
@@ -8,6 +10,7 @@ app = Blueprint('excluir', __name__)
 @app.route('/<int:id>')
 @login_required
 def excluir(id):
+    """Rota para excluir usuário."""
     user = Usuario.query.filter_by(_id=id).first()
 
     db.session.delete(user)

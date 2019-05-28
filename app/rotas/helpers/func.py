@@ -9,7 +9,15 @@ from werkzeug.security import check_password_hash
 
 
 def validar_login(nome, senha):
-    """Função de validação dos dados do formulário."""
+    """Função de validação de login de acordo com os dados do formulário.
+
+    Args:
+        nome: Nome do usuário.
+        senha: Senha do usuário.
+
+    Returns:
+        bool: Retorna True se login correto, se não False.
+    """
     user = db.session.query(Usuario).filter_by(
         nome=nome).first()
     check_pwd = check_password_hash(user.senha, senha)
@@ -19,6 +27,14 @@ def validar_login(nome, senha):
 
 
 def gerar_uuid(email):
+    """Geração de uuid para número da contas
+
+    Args:
+        email: email do usuário.
+
+    Returns:
+        str: Retorna uma string com o valor do uuid.
+    """
     # user = db.session.query(Usuario).filter_by(
     #     email=email).first()
     data = datetime.now()
@@ -33,6 +49,12 @@ def gerar_uuid(email):
 
 
 def enviar_token(email, token):
+    """Envio de email com o número do token para ativação da conta.
+
+    Args:
+        email: email do usuário.
+        token: token para ser enviado.
+    """
     content = """Token para ativacao da sua conta no banco MOC.\n\n
         Codigo de ativacao: {}\n
         Acesse: http://moc-banco.herokuapp.com/ativar/""".format(token)
@@ -44,6 +66,12 @@ def enviar_token(email, token):
 
 
 def adic_dinheiro(email, saldo):
+    """Função para realizar deposito na conta.
+
+    Args:
+        email: email do usuário.
+        saldo: saldo da conta a ser depositado.
+    """
     conta = Conta.query.filter_by(email=email).first()
     conta.saldo += saldo
     db.session.commit()
@@ -51,14 +79,40 @@ def adic_dinheiro(email, saldo):
 
 
 def consulta_saldo(email):
+    """Função para consultar saldo na conta.
+
+    Args:
+        email: email do usuário.
+
+    Returns:
+        conta.
+    """
     return Conta.query.filter_by(email=email).first()
 
 
 def checar_email_existente(email):
+    """Função para checar se já existe alguma conta com o email digitado.
+
+    Args:
+        email: email do usuário.
+
+    Returns:
+        int: Quantidade de contas com o email digitado.
+    """
     return len(Usuario.query.filter_by(email=email).all()) > 0
 
 
 def tranferir_dinheiro(conta2, valor, email):
+    """Função para checar se já existe alguma conta com o email digitado.
+
+    Args:
+        email: email do usuário que deseja realizar a transferência.
+        conta2: conta de destino.
+        valor: valor da transferência.
+
+    Returns:
+        bool: Retorna True se transferência realizada, se não False.
+    """
     conta = Conta.query.filter_by(email=email).first()
     if conta.saldo >= valor:
         conta.saldo -= valor

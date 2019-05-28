@@ -1,5 +1,5 @@
 # coding: utf-8
-"""Projeto web utilizando Flask e Flask-login."""
+"""Arquivo para a criação das tabelas."""
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -14,7 +14,7 @@ db = SQLAlchemy()
 
 
 class Usuario(db.Model):
-    """Classe para criação da tabela usuário no banco."""
+    """Classe para criação da tabela de usuário no banco."""
 
     __tablename__ = 'usuario'
 
@@ -45,6 +45,7 @@ class Usuario(db.Model):
 
 
 class Conta(db.Model):
+    """Classe para criação da tabela de contas no banco."""
     __tablename__ = "conta"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -58,6 +59,7 @@ class Conta(db.Model):
 
 
 class Extrato(db.Model):
+    """Classe para criação da tabela de extrato no banco."""
     __tablename__ = "extrato"
 
     id = db.Column(db.Integer, primary_key=True)

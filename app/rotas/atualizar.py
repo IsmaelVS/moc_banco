@@ -1,4 +1,4 @@
-"""Arquivo para rota de geração do Qrcode."""
+"""Arquivo para atualizar dados do usuário."""
 
 from flask import Blueprint, render_template
 from flask_login import current_user
@@ -11,4 +11,5 @@ app = Blueprint('atualizar', __name__)
 @app.route('/')
 @login_required
 def atualiza_usuario():
+    """Rota para atualizar dados do usuário."""
     return render_template('atualiza.html', usuario=current_user)

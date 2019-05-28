@@ -1,3 +1,5 @@
+"""Arquivo para realizar ativação do cadastro."""
+
 from app import db
 from app.database.tabelas import Conta, Usuario
 from app.rotas.helpers.func import gerar_uuid
@@ -10,14 +12,14 @@ app = Blueprint('ativar', __name__)
 
 @app.route('/')
 def home():
-    """Rota com formulário para validar cadastro."""
+    """Rota para realizar ativação do cadastro."""
     logout_user()
     return render_template('ativar_cadastro.html')
 
 
 @app.route('/checar', methods=['POST'])
 def ativar_cadastro():
-    """Rota para checar cadastro."""
+    """Rota para checar ativação do cadastro."""
     token = request.form['token']
     email = request.form['email']
     user = Usuario.query.filter_by(email=email).first()

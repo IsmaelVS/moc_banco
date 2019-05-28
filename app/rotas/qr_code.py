@@ -10,6 +10,7 @@ app = Blueprint('qr-code', __name__)
 @app.route('/',  methods=['GET'])
 @login_required
 def login_template():
+    """Rota para o Qrcode."""
     # uuid = gerar_uuid(request.form['usuario'])
     # gerar_qrcode(uuid)
     return render_template('qr_code.html')
