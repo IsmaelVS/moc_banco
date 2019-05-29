@@ -1,7 +1,7 @@
 """Arquivo para rota de geração do Qrcode."""
 
 # from app.rotas.helpers.func import gerar_uuid
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template
 from flask_login import login_required
 
 app = Blueprint('qr-code', __name__)

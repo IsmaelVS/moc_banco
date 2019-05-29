@@ -20,13 +20,13 @@ def login_template():
 @app.route('/checar', methods=['POST'])
 def check_login():
     """Rota para validar login."""
-    result = validar_login(request.form['nome'], request.form['senha'])
-    user = Usuario.query.filter_by(nome=request.form['nome']).first()
-    email = user.email
-    conta = Conta.query.filter_by(email=email).first()
+    result = validar_login(request.form.get('nome'), request.form.get('senha'))
+    user = Usuario.query.filter_by(nome=request.form.get('nome')).first()
     if result and user.status:
+        email = user.email
+        conta = Conta.query.filter_by(email=email).first()
         login_user(result)
         return render_template(
             'qr_code.html', token=conta.conta,
             img='{}.png'.format(conta.conta))
-    return render_template('login.html')
+    return render_template('login.html', invalid=True)

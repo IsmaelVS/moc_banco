@@ -30,7 +30,8 @@ def checar_cadastro():
     token = randint(10000, 99999)
     if checar_email_existente(email):
         return render_template('cadastro.html', user=True)
-    user = Usuario(nome=nome, senha=hashed_senha, email=email, token=token, nivel=2)
+    user = Usuario(nome=nome, senha=hashed_senha,
+                   email=email, token=token, nivel=2)
     enviar_token(email, token)
     db.session.add(user)
     db.session.commit()

@@ -23,10 +23,10 @@ def home():
 @app.route('/checar', methods=['POST'])
 def checar_cadastro():
     """Rota para checar cadastro."""
-    nome = request.form['nome']
+    nome = request.form.get('nome')
     hashed_senha = generate_password_hash(
-        request.form['senha'], method='sha256')
-    email = request.form['email']
+        request.form.get('senha'), method='sha256')
+    email = request.form.get('email')
     token = randint(10000, 99999)
     if checar_email_existente(email):
         return render_template('cadastro.html', user=True)

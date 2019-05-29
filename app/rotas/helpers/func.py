@@ -4,8 +4,9 @@
 import smtplib
 from datetime import datetime
 
-from app.database.tabelas import Conta, Extrato, Usuario, db
 from werkzeug.security import check_password_hash
+
+from app.database.tabelas import Conta, Usuario, db
 
 
 def validar_login(nome, senha):
@@ -20,10 +21,11 @@ def validar_login(nome, senha):
     """
     user = db.session.query(Usuario).filter_by(
         nome=nome).first()
-    check_pwd = check_password_hash(user.senha, senha)
-    if check_pwd:
-        return user
-    return False
+    if user:
+        check_pwd = check_password_hash(user.senha, senha)
+        if check_pwd:
+            return user
+        return False
 
 
 def gerar_uuid(email):
