@@ -12,6 +12,12 @@
       		<label for="token">Digite o token recebido</label>
   				<input type="text" id="token" required name="token" class="form-control" />
   			</div>
+            {% if token %}
+            <span>Token inválido, tente novamente!</span>
+            {% endif %}
+            {% if user %}
+            <span>Usuário inválido!</span>
+            {% endif %}
   			<button type="submit" class="btn btn-block btn-success">Ativar conta</button>
   		</form>
   	</div>

@@ -12,6 +12,9 @@
       		<label for="senha">Senha</label>
   				<input type="password" id="senha" required name="senha" class="form-control" />
   			</div>
+            {% if invalid %}
+            <span>Usuário ou senha incorreto, tente novamente!</span>
+            {% endif %}
   			<button type="submit" class="btn btn-block btn-success">Cadastrar</button>
   		</form>
   	</div>
