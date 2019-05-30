@@ -1,11 +1,12 @@
 """Arquivo para realizar ativação do cadastro."""
 
+from flask import Blueprint, render_template, request
+from flask_login import logout_user
+
 from app import db
 from app.database.tabelas import Conta, Usuario
 from app.rotas.helpers.func import gerar_uuid
 from app.views.static.gerar_qr_code import gerar_qrcode
-from flask import Blueprint, render_template, request
-from flask_login import logout_user
 
 app = Blueprint('ativar', __name__)
 
@@ -27,7 +28,7 @@ def ativar_cadastro():
         if user.token == token:
             user.status = True
             n_conta = gerar_uuid(email)
-            conta = Conta(email=email, saldo=0.0, conta=n_conta)
+            conta = Conta(usuario=user, saldo=0.0, conta=n_conta)
             db.session.add(conta)
             db.session.commit()
             gerar_qrcode(n_conta)

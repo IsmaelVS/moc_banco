@@ -49,13 +49,14 @@ class Conta(db.Model):
     __tablename__ = "conta"
 
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String, nullable=False)
+    usuario = db.relationship('Usuario')
+    id_usuario = db.Column(db.Integer, db.ForeignKey('usuario._id'))
     saldo = db.Column(db.Float, default=0.0, nullable=False)
     conta = db.Column(db.String, nullable=False)
 
     def __repr__(self):
-        return """Conta(email={}, saldo={}, conta={})
-        """.format(self.email, self.saldo, self.conta)
+        return """Conta(usuario={}, saldo={}, conta={})
+        """.format(self.usuario, self.saldo, self.conta)
 
 
 class Extrato(db.Model):
@@ -65,7 +66,8 @@ class Extrato(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     transferencia = db.Column(
         db.Integer, nullable=False, default=1)
-    email = db.Column(db.String, nullable=True)
+    conta = db.relationship('Conta')
+    id_conta = db.Column(db.Integer, db.ForeignKey('conta.id'))
     data = db.Column(db.DateTime, nullable=False, default=db.DATETIME)
     valor = db.Column(db.Float, nullable=False)
 
