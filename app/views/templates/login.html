@@ -13,7 +13,13 @@
   				<input type="password" id="senha" required name="senha" class="form-control" />
   			</div>
             {% if invalid %}
-            <span>Usuário ou senha incorreto, tente novamente!</span>
+            <span>Senha incorreta, tente novamente!</span>
+            {% endif %}
+            {% if status %}
+            <span>Usuário não ativo, realize a ativação antes!</span>
+            {% endif %}
+            {% if user %}
+            <span>Usuário não cadastrado. Verifique seu cadastro!</span>
             {% endif %}
   			<button type="submit" class="btn btn-block btn-success">Cadastrar</button>
   		</form>

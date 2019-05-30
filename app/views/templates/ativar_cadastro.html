@@ -10,13 +10,13 @@
   			</div>
   			<div class="form-group">
       		<label for="token">Digite o token recebido</label>
-  				<input type="text" id="token" required name="token" class="form-control" />
+  				<input type="text" id="token" required pattern="[0-9]{5}" name="token" class="form-control" maxlength="5" />
   			</div>
             {% if token %}
-            <span>Token inválido, tente novamente!</span>
+            <span>Token inválido, verifique e tente novamente!</span>
             {% endif %}
             {% if user %}
-            <span>Usuário inválido!</span>
+            <span>Email inválido!</span>
             {% endif %}
   			<button type="submit" class="btn btn-block btn-success">Ativar conta</button>
   		</form>
