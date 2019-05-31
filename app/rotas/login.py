@@ -26,8 +26,7 @@ def check_login():
     if user:
         if user.status:
             if result:
-                email = user.email
-                conta = Conta.query.filter_by(email=email).first()
+                conta = Conta.query.filter_by(usuario=user).first()
                 login_user(result)
                 return render_template(
                     'qr_code.html', token=conta.conta,
