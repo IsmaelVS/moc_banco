@@ -3,11 +3,12 @@
 
 from random import randint
 
-from app.database.tabelas import Usuario, db
-from app.rotas.helpers.func import checar_email_existente, enviar_token
 from flask import Blueprint, render_template, request
 from flask_login import logout_user
 from werkzeug.security import generate_password_hash
+
+from app.database.tabelas import Usuario, db
+from app.rotas.helpers.func import checar_email_existente, enviar_token
 
 app = Blueprint('cadastro', __name__)
 
@@ -27,11 +28,11 @@ def checar_cadastro():
         request.form.get('senha'), method='sha256')
     email = request.form.get('email').lower()
     token = randint(10000, 99999)
-    # import ipdb; ipdb.sset_trace()
     if checar_email_existente(email):
         return render_template('cadastro.html', user=True)
-    user = Usuario(nome=nome, senha=hashed_senha, email=email, token=token)
-    enviar_token(email, token)
+    user = Usuario(nome=nome, senha=hashed_senha,
+                   email=email, token=token, nivel=0)
+    # enviar_token(email, token)
     db.session.add(user)
     db.session.commit()
     logout_user()

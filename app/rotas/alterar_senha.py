@@ -1,9 +1,10 @@
 """Arquivo para alterar senha do usuário."""
 
-from flask import Blueprint, render_template
-from flask_login import current_user
+from flask import Blueprint, render_template, request
+from flask_login import current_user, login_required
+from werkzeug.security import check_password_hash, generate_password_hash
 
-from flask_login import login_required
+from app.database.tabelas import db
 
 app = Blueprint('alterar-senha', __name__)
 
@@ -14,6 +15,7 @@ def atualiza_senha():
     """Rota para alterar senha do usuário."""
     return render_template('alterar_senha.html')
 
+
 @app.route('/checar', methods=['POST'])
 @login_required
 def checar_senhas():
@@ -21,5 +23,8 @@ def checar_senhas():
     hashed_senha = generate_password_hash(
         request.form.get('senha'), method='sha256')
     check_pwd = check_password_hash(hashed_senha, request.form.get('c_senha'))
-    db.session.commit()
-    return render_template('menu.html')
+    if check_pwd:
+        current_user.senha = hashed_senha
+        db.session.commit()
+        return render_template('menu.html')
+    return render_template('alterar_senha.html', senha=True)

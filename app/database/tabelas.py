@@ -23,7 +23,7 @@ class Usuario(db.Model):
     senha = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
     status = db.Column(db.Boolean, default=False, nullable=False)
-    nivel = db.Column(db.Integer, default=0, nullable=False)
+    nivel = db.Column(db.Integer, nullable=False)
     token = db.Column(db.String, default=0, nullable=False)
 
     def is_authenticated(self):
@@ -65,12 +65,12 @@ class Extrato(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     transferencia = db.Column(
-        db.Integer, nullable=False, default=1)
+        db.Integer, nullable=False, default=0)
     conta = db.relationship('Conta')
     id_conta = db.Column(db.Integer, db.ForeignKey('conta.id'))
     data = db.Column(db.DateTime, nullable=False, default=db.DATETIME)
-    valor = db.Column(db.Float, nullable=False)
+    valor = db.Column(db.Float, nullable=False, default=0.0)
 
     def __repr__(self):
-        return """Extrato(transferencia={}, email={}, data={}, valor={}
-        """.format(self.transferencia, self.email, self.data, self.valor)
+        return """Extrato(transferencia={}, data={}, valor={}
+        """.format(self.transferencia, self.data, self.valor)

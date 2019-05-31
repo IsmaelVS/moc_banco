@@ -4,9 +4,10 @@
 import smtplib
 from datetime import datetime
 
+from flask_login import current_user
 from werkzeug.security import check_password_hash
 
-from app.database.tabelas import Conta, Usuario, db
+from app.database.tabelas import Conta, Extrato, Usuario, db
 
 
 def validar_login(nome, senha):
@@ -67,29 +68,25 @@ def enviar_token(email, token):
     mail.sendmail('moc.banco@gmail.com', email, content)
 
 
-def adic_dinheiro(email, saldo):
+def adic_dinheiro(saldo):
     """Função para realizar deposito na conta.
 
     Args:
-        email: email do usuário.
         saldo: saldo da conta a ser depositado.
     """
-    conta = Conta.query.filter_by(email=email).first()
+    conta = consulta_saldo()
     conta.saldo += saldo
     db.session.commit()
     return conta
 
 
-def consulta_saldo(email):
+def consulta_saldo():
     """Função para consultar saldo na conta.
-
-    Args:
-        email: email do usuário.
 
     Returns:
         conta.
     """
-    return Conta.query.filter_by(email=email).first()
+    return Conta.query.filter_by(usuario=current_user).first()
 
 
 def checar_email_existente(email):
@@ -104,27 +101,26 @@ def checar_email_existente(email):
     return len(Usuario.query.filter_by(email=email).all()) > 0
 
 
-def tranferir_dinheiro(conta2, valor, email):
+def tranferir_dinheiro(conta2, valor):
     """Função para checar se já existe alguma conta com o email digitado.
 
     Args:
-        email: email do usuário que deseja realizar a transferência.
         conta2: conta de destino.
         valor: valor da transferência.
 
     Returns:
         bool: Retorna True se transferência realizada, se não False.
     """
-    conta = Conta.query.filter_by(email=email).first()
+    conta = consulta_saldo()
     if conta.saldo >= valor:
         conta.saldo -= valor
-        # import ipdb; ipdb.sset_trace()
         conta_dest = Conta.query.filter_by(conta=conta2).first()
         conta_dest.saldo += valor
-        # tranferecia_rem = Extrato(email=email, data=datetime.now(), valor=valor)
-        # db.session.add(tranferecia_rem)
-        # tranferecia_dest = Extrato(data=datetime.now(), valor=valor)
-        # db.session.add(tranferecia_dest)
+        tranferecia_rem = Extrato(transferencia=0, conta=conta, valor=valor)
+        db.session.add(tranferecia_rem)
+        tranferecia_dest = Extrato(transferencia=1, conta=conta_dest,
+                                   valor=valor)
+        db.session.add(tranferecia_dest)
         db.session.commit()
         return True
     return False
