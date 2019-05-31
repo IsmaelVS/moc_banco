@@ -48,6 +48,9 @@ app.register_blueprint(cadastro_credenciado, url_prefix='/cadastro-credenciado')
 from app.rotas.cadastro_adm import app as cadastro_adm  # NOQA
 app.register_blueprint(cadastro_adm, url_prefix='/cadastro-adm')
 
+from app.rotas.alterar_senha import app as alterar_senha  # NOQA
+app.register_blueprint(alterar_senha, url_prefix='/alterar-senha')
+
 app.secret_key = b'\x89\x03\xf4\xdc\x1a\x95f\xe0\xae!\xf6Ml\xc6\x03\xc4'
 app.config['SESSION_TYPE'] = 'filesystem'
 
