@@ -113,13 +113,15 @@ def tranferir_dinheiro(conta2, valor):
     """
     conta = consulta_saldo()
     if conta.saldo >= valor:
+        data_transferencia = datetime.now()
         conta.saldo -= valor
         conta_dest = Conta.query.filter_by(conta=conta2).first()
         conta_dest.saldo += valor
-        tranferecia_rem = Extrato(transferencia=0, conta=conta, valor=valor)
+        tranferecia_rem = Extrato(transferencia=0, conta=conta,
+                                  valor=valor, data=data_transferencia)
         db.session.add(tranferecia_rem)
         tranferecia_dest = Extrato(transferencia=1, conta=conta_dest,
-                                   valor=valor)
+                                   valor=valor, data=data_transferencia)
         db.session.add(tranferecia_dest)
         db.session.commit()
         return True
