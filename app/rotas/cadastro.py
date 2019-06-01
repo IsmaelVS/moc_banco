@@ -17,7 +17,7 @@ app = Blueprint('cadastro', __name__)
 def home():
     """Rota inicial para realizar cadastro."""
     logout_user()
-    return render_template('cadastro.html', nivel=2)
+    return render_template('cadastro.html', nivel=0)
 
 
 @app.route('/checar', methods=['POST'])
