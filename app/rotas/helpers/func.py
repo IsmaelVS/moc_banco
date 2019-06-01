@@ -33,20 +33,22 @@ def gerar_uuid(email):
     """Geração de uuid para número da contas
 
     Args:
-        email: email do usuário.
+        email: Email do usuário.
 
     Returns:
         str: Retorna uma string com o valor do uuid.
     """
-    # user = db.session.query(Usuario).filter_by(
-    #     email=email).first()
+    user = Usuario.query.filter_by(email=email).first()
     data = datetime.now()
-    uid = str(data.year)[-2:] + '{:d}'.format(data.month).zfill(2)
-    sec = str(data.second)
-    hr = str(data.hour)
-    # n_id = 1 if 101 > user._id > 1 else 2 if 1001 > user._id > 100 else 3
-    idd = '{:d}'.format(0).zfill(10)
-    uuid = '{}{}{}{}'.format(uid, idd, hr, sec)
+    primeiro = str(data.year)[-2:] + '{:d}'.format(data.month).zfill(2)
+    segundo = 1 if 101 > user._id > 1 else 2 if 1001 > user._id > 100 else 3
+    terceiro = '{:d}'.format(user._id).zfill(9)
+    dig1 = str(int(primeiro[0]) + int(primeiro[1]) +
+               int(primeiro[2]) + int(primeiro[3]))[0]
+    dig2 = str(int(terceiro[0]) + int(terceiro[1]) + int(terceiro[2]) +
+               int(terceiro[3]) + int(terceiro[4]) + int(terceiro[5]) +
+               int(terceiro[6]) + int(terceiro[7]) + int(terceiro[8]))[0]
+    uuid = '{}{}{}{}{}'.format(primeiro, segundo, terceiro, dig1, dig2)
 
     return uuid
 
