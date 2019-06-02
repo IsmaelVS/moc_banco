@@ -6,11 +6,11 @@
 			<form action="/ativar/checar" method=post>
 				<div class="form-group">
       		<label for="email">Digite seu e-mail</label>
-  				<input type="text" id="email" required name="email" class="form-control" />
+  				<input type="email" id="email" required name="email" class="form-control" />
   			</div>
   			<div class="form-group">
       		<label for="token">Digite o token recebido</label>
-  				<input type="text" id="token" required pattern="[0-9]{5}" name="token" class="form-control" maxlength="5" />
+  				<input type="text" id="token" required name="token" class="form-control" maxlength="5" />
   			</div>
             {% if token %}
             <span>Token inválido, verifique e tente novamente!</span>

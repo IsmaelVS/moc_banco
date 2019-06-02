@@ -6,7 +6,7 @@
   		<form action="/adicionar-dinheiro/checar" method=post>
   			<div class="form-group">
       		<label for="saldo">Digite o valor desejado</label>
-  				<input type="text" id="saldo" required pattern="[0-9]" name="saldo" class="form-control" />
+  				<input type="text" id="saldo" required pattern="[0-9]{1,5}" name="saldo" class="form-control" maxlength="5"/>
   			</div>
   			<button type="submit" class="btn btn-block btn-success">Adicionar</button>
   		</form>

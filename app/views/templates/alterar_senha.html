@@ -6,11 +6,11 @@
   		<form action="/alterar-senha/checar" method=post>
   			<div class="form-group">
       		<label for="senha">Digite sua senha</label>
-  				<input type="password" id="senha" required name="senha" class="form-control" />
+  				<input type="password" id="senha" required pattern=".{6,}" title="A sua senha deve conter pelo menos 6 caracteres." name="senha" class="form-control" />
   			</div>
   			<div class="form-group">
       		<label for="c_senha">Confirme sua senha</label>
-  				<input type="password" id="c_senha" required name="c_senha" class="form-control" />
+  				<input type="password" id="c_senha" required pattern=".{6,}" title="A sua senha deve conter pelo menos 6 caracteres." name="c_senha" class="form-control" />
   			</div>
             {% if senha %}
               <h6>Senhas não são iguais.</h6>
