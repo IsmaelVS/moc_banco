@@ -1,14 +1,13 @@
 # coding: utf-8
 """Arquivo de rota de cadastro."""
 
-from random import randint
-
+from app.database.tabelas import Usuario, db
+from app.rotas.helpers.func import (checar_email_existente,
+                                    checar_nome_existente, criar_usuario,
+                                    enviar_token)
 from flask import Blueprint, render_template, request
 from flask_login import logout_user
 from werkzeug.security import generate_password_hash
-
-from app.database.tabelas import Usuario, db
-from app.rotas.helpers.func import checar_email_existente, enviar_token
 
 app = Blueprint('cadastro', __name__)
 
@@ -24,16 +23,18 @@ def home():
 def checar_cadastro():
     """Rota para checar cadastro."""
     nome = request.form.get('nome').lower()
-    hashed_senha = generate_password_hash(
-        request.form.get('senha'), method='sha256')
+    senha = request.form.get('senha')
     email = request.form.get('email').lower()
-    token = randint(10000, 99999)
-    if checar_email_existente(email):
-        return render_template('cadastro.html', user=True)
-    user = Usuario(nome=nome, senha=hashed_senha,
-                   email=email, token=token, nivel=0)
-    # enviar_token(email, token)
-    db.session.add(user)
-    db.session.commit()
-    logout_user()
-    return render_template('ativar_cadastro.html')
+    if nome and senha and email:
+        if len(senha) >= 6:
+            if checar_email_existente(email):
+                return render_template('cadastro.html', email=True)
+            if checar_nome_existente(nome):
+                return render_template('cadastro.html', nome=True)
+            token = criar_usuario(nome, senha, email, 0)
+            if enviar_token(email, token):
+                logout_user()
+                return render_template('ativar_cadastro.html')
+            return render_template('cadastro.html', falha_email=True)
+        return render_template('cadastro.html', senha=True)
+    return render_template('cadastro.html', dados=True)
