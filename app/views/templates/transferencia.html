@@ -6,12 +6,21 @@
   		<form action="/transferencia/checar" method=post>
   		  <div class="form-group">
       		<label for="conta">Conta</label>
-  				<input type="text" id="conta" required pattern="[0-9]{18}" name="conta" class="form-control" maxlength="18" />
+  				<input type="text" id="conta" required pattern="[0-9]{1,18}" name="conta" class="form-control" maxlength="18"/>
   			</div>
   			<div class="form-group">
       		<label for="valor">Valor</label>
-  				<input type="text" id="valor" required name="valor" class="form-control" maxlength="5" />
+  				<input type="text" id="valor" required pattern="[0-9]{1,5}" name="valor" class="form-control" maxlength="5" />
   			</div>
+        {% if sem_saldo %}
+          <h6>Valor negado.</h6>
+        {% endif%}
+        {% if invalid %}
+          <h6>Conta digitada inválida.</h6>
+        {% endif%}
+        {% if conta %}
+        <h6>Conta digitada inválida.</h6>
+        {% endif%}
   			<button type="submit" class="btn btn-block btn-success">Cadastrar</button>
   		</form>
   	</div>
