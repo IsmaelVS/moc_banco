@@ -3,11 +3,13 @@
 
 import smtplib
 from datetime import datetime
-
-from flask_login import current_user
-from werkzeug.security import check_password_hash
+from random import randint
 
 from app.database.tabelas import Conta, Extrato, Usuario, db
+from flask_login import current_user
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from werkzeug.security import check_password_hash, generate_password_hash
 
 
 def validar_login(nome, senha):
@@ -60,14 +62,29 @@ def enviar_token(email, token):
         email: email do usuário.
         token: token para ser enviado.
     """
-    content = """Token para ativacao da sua conta no banco MOC.\n\n
+    message = """Token para ativacao da sua conta no banco MOC.\n
         Codigo de ativacao: {}\n
         Acesse: http://moc-banco.herokuapp.com/ativar/""".format(token)
-    mail = smtplib.SMTP('smtp.gmail.com', 587)
-    mail.ehlo()
-    mail.starttls()
-    mail.login('moc.banco@gmail.com', 'mocbanco123')
-    mail.sendmail('moc.banco@gmail.com', email, content)
+    try:
+        msg = MIMEMultipart()
+
+        password = 'mocbanco123'
+        msg['From'] = 'moc.banco@gmail.com'
+        msg['To'] = email
+        msg['Subject'] = "Token para ativação da conta"
+        msg.attach(MIMEText(message))
+
+        server = smtplib.SMTP('smtp.gmail.com: 587')
+
+        server.starttls()
+
+        server.login(msg['From'], password)
+
+        server.sendmail(msg['From'], msg['To'], msg.as_string())
+
+        return True
+    except Except:
+        return False
 
 
 def adic_dinheiro(saldo):
@@ -80,6 +97,17 @@ def adic_dinheiro(saldo):
     conta.saldo += saldo
     db.session.commit()
     return conta
+
+
+def criar_usuario(nome, senha, email, nivel):
+    """Função para criação de usuário."""
+    token = randint(10000, 99999)
+    hashed_senha = generate_password_hash(senha, method='sha256')
+    user = Usuario(nome=nome, senha=hashed_senha,
+                   email=email, token=token, nivel=nivel)
+    db.session.add(user)
+    db.session.commit()
+    return token
 
 
 def consulta_saldo():
@@ -103,6 +131,18 @@ def checar_email_existente(email):
     return len(Usuario.query.filter_by(email=email).all()) > 0
 
 
+def checar_nome_existente(nome):
+    """Função para checar se já existe alguma conta com o nome digitado.
+
+    Args:
+        nome: nome do usuário.
+
+    Returns:
+        int: Quantidade de contas com o nome digitado.
+    """
+    return len(Usuario.query.filter_by(nome=nome).all()) > 0
+
+
 def tranferir_dinheiro(conta2, valor):
     """Função para checar se já existe alguma conta com o email digitado.
 
@@ -114,7 +154,7 @@ def tranferir_dinheiro(conta2, valor):
         bool: Retorna True se transferência realizada, se não False.
     """
     conta = consulta_saldo()
-    if conta.saldo >= valor:
+    if conta.saldo >= valor and valor > 0:
         data_transferencia = datetime.now()
         conta.saldo -= valor
         conta_dest = Conta.query.filter_by(conta=conta2).first()
@@ -126,5 +166,13 @@ def tranferir_dinheiro(conta2, valor):
                                    valor=valor, data=data_transferencia)
         db.session.add(tranferecia_dest)
         db.session.commit()
+        return True
+    return False
+
+
+def validar_conta(num_cont):
+    """Função para validar se número de conta digitada é valida."""
+    conta = Conta.query.filter_by(conta=num_cont).first()
+    if conta:
         return True
     return False
