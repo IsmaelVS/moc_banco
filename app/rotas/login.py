@@ -21,16 +21,12 @@ def check_login():
     """Rota para validar login."""
     result = validar_login(
         request.form.get('nome').lower(), request.form.get('senha'))
-    user = Usuario.query.filter_by(
-        nome=request.form.get('nome').lower()).first()
-    if user:
-        if user.status:
-            if result:
-                conta = Conta.query.filter_by(usuario=user).first()
-                login_user(result)
-                return render_template(
-                    'qr_code.html', token=conta.conta,
-                    img='{}.png'.format(conta.conta))
-            return render_template('login.html', status=True)
-        return render_template('login.html', user=True)
+    if result:
+        if result.status:
+            conta = Conta.query.filter_by(usuario=result).first()
+            login_user(result)
+            return render_template(
+                'qr_code.html', token=conta.conta,
+                img='{}.png'.format(conta.conta))
+        return render_template('login.html', status=True)
     return render_template('login.html', invalid=True)

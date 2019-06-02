@@ -6,22 +6,19 @@
   		<form action="/login/checar" method=post>
   		  <div class="form-group">
       		<label for="nome">Usuário</label>
-  				<input type="text" id="nome" required name="nome" class="form-control" />
+  				<input type="text" id="nome" required name="nome" title="Digitar seu nome" class="form-control" />
   			</div>
   			<div class="form-group">
       		<label for="senha">Senha</label>
-  				<input type="password" id="senha" required name="senha" class="form-control" />
+  				<input type="password" id="senha" required name="senha" title="Digitar sua senha" class="form-control" />
   			</div>
             {% if invalid %}
-            <span>Senha incorreta, tente novamente!</span>
+              <span>Nome ou senha incorreta, tente novamente!</span>
             {% endif %}
             {% if status %}
-            <span>Usuário não ativo, realize a ativação antes!</span>
+              <span>Usuário não ativo, realize a ativação antes!</span>
             {% endif %}
-            {% if user %}
-            <span>Usuário não cadastrado. Verifique seu cadastro!</span>
-            {% endif %}
-  			<button type="submit" class="btn btn-block btn-success">Cadastrar</button>
+  			<button type="submit" title="Clique para realizar o login" class="btn btn-block btn-success">Logar</button>
   		</form>
   	</div>
   </div>
