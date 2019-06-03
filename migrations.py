@@ -1,7 +1,9 @@
-from app import app
+from app import create_app
 from app.database.tabelas import db
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
+
+app = create_app()
 
 migrate = Migrate(app, db)
 
