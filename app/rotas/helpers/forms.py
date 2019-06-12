@@ -1,6 +1,7 @@
-from flask_wtf import FlaskForm
 from wtforms import PasswordField, SubmitField, TextField
 from wtforms.validators import Email, InputRequired, Length
+
+from flask_wtf import FlaskForm
 
 
 class FormCadastro(FlaskForm):
@@ -9,9 +10,11 @@ class FormCadastro(FlaskForm):
     username = TextField('Digite seu username.',
                          validators=[InputRequired()])
     email = TextField('Digite seu email.',
-                      validators=[Email(), InputRequired()])
+                      validators=[Email(message='Email inválido.'),
+                                  InputRequired()])
     senha = PasswordField('Crie uma senha.',
-                          validators=[InputRequired(), Length(min=6)])
+                          validators=[InputRequired(), Length(min=6,
+                                      message='Sua senha deve ter no mínimo 6 caracteres.')])
     cadastrar = SubmitField('Cadastrar')
 
 

@@ -3,13 +3,14 @@
 
 import smtplib
 from datetime import datetime
-from random import randint
-
-from app.database.tabelas import Conta, Extrato, Usuario, db
-from flask_login import current_user
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from random import randint
+
+from flask_login import current_user
 from werkzeug.security import check_password_hash, generate_password_hash
+
+from app.database.tabelas import Conta, Extrato, Usuario, db
 
 
 def validar_login(nome, senha):
@@ -119,28 +120,18 @@ def consulta_saldo():
     return Conta.query.filter_by(usuario=current_user).first()
 
 
-def checar_email_existente(email):
+def checar_usuario_existente(nome, email):
     """Função para checar se já existe alguma conta com o email digitado.
 
     Args:
+        nome: nome do usuário.
         email: email do usuário.
 
     Returns:
         int: Quantidade de contas com o email digitado.
     """
-    return len(Usuario.query.filter_by(email=email).all()) > 0
-
-
-def checar_nome_existente(nome):
-    """Função para checar se já existe alguma conta com o nome digitado.
-
-    Args:
-        nome: nome do usuário.
-
-    Returns:
-        int: Quantidade de contas com o nome digitado.
-    """
-    return len(Usuario.query.filter_by(nome=nome).all()) > 0
+    db.create_all()
+    return len(Usuario.query.filter_by(email=email).all()) > 0 or len(Usuario.query.filter_by(nome=nome).all()) > 0
 
 
 def tranferir_dinheiro(conta2, valor):

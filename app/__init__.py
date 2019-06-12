@@ -2,8 +2,9 @@
 from flask import Flask
 from flask_login import LoginManager
 
-from app.database.tabelas import db, Usuario, db_url
+from app.database.tabelas import db, Usuario
 from flask_session import Session
+from flask_bootstrap import Bootstrap
 
 login_manager = LoginManager()
 session = Session()
@@ -12,6 +13,7 @@ session = Session()
 def create_app():
     app = Flask(__name__, template_folder='views/templates', static_folder='views/static')
 
+    Bootstrap(app)
 
     from app.rotas.login import app as login  # NOQA
     app.register_blueprint(login, url_prefix='/login')
