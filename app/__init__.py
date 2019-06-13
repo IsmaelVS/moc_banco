@@ -2,7 +2,7 @@
 from flask import Flask
 from flask_login import LoginManager
 
-from app.database.tabelas import db, Usuario
+from app.database.tabelas import db_url, db, Usuario
 from flask_session import Session
 from flask_bootstrap import Bootstrap
 
