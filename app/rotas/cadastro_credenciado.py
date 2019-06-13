@@ -15,7 +15,8 @@ app = Blueprint('cadastro-credenciado', __name__)
 def home():
     """Rota inicial para cadastro de credenciado."""
     logout_user()
-    return render_template('cadastro.html', nivel=1)
+    form = FormCadastro()
+    return render_template('cadastro.html', form=form, nivel=1)
 
 
 @app.route('/checar', methods=['POST'])

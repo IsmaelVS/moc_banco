@@ -15,7 +15,8 @@ app = Blueprint('cadastro-adm', __name__)
 def home():
     """Rota inicial para cadastro de administrador."""
     logout_user()
-    return render_template('cadastro.html', nivel=2)
+    form = FormCadastro()
+    return render_template('cadastro.html', form=form, nivel=2)
 
 
 @app.route('/checar', methods=['POST'])
