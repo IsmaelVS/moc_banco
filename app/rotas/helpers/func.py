@@ -7,10 +7,10 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from random import randint
 
-from flask_login import current_user
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app.database.tabelas import Conta, Extrato, Usuario, db
+from flask_login import current_user
 
 
 def validar_login(nome, senha):
@@ -84,7 +84,7 @@ def enviar_token(email, token):
         server.sendmail(msg['From'], msg['To'], msg.as_string())
 
         return True
-    except Except:
+    except Exception:
         return False
 
 
@@ -130,7 +130,8 @@ def checar_usuario_existente(nome, email):
     Returns:
         int: Quantidade de contas com o email digitado.
     """
-    return len(Usuario.query.filter_by(email=email).all()) > 0 or len(Usuario.query.filter_by(nome=nome).all()) > 0
+    return len(Usuario.query.filter_by(email=email).all()) > 0 or\
+        len(Usuario.query.filter_by(nome=nome).all()) > 0
 
 
 def tranferir_dinheiro(conta2, valor):
