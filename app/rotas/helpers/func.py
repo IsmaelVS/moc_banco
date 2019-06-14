@@ -100,11 +100,11 @@ def adic_dinheiro(saldo):
     return conta
 
 
-def criar_usuario(nome, senha, email, nivel):
+def criar_usuario(nome, username, senha, email, nivel):
     """Função para criação de usuário."""
     token = randint(10000, 99999)
     hashed_senha = generate_password_hash(senha, method='sha256')
-    user = Usuario(nome=nome, senha=hashed_senha,
+    user = Usuario(nome=nome, username=username.lower(), senha=hashed_senha,
                    email=email, token=token, nivel=nivel)
     db.session.add(user)
     db.session.commit()
@@ -130,7 +130,6 @@ def checar_usuario_existente(nome, email):
     Returns:
         int: Quantidade de contas com o email digitado.
     """
-    db.create_all()
     return len(Usuario.query.filter_by(email=email).all()) > 0 or len(Usuario.query.filter_by(nome=nome).all()) > 0
 
 
