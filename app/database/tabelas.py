@@ -19,6 +19,7 @@ class Usuario(db.Model):
 
     _id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String, nullable=False)
+    username = db.Column(db.String, nullable=False)
     senha = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
     status = db.Column(db.Boolean, default=False, nullable=False)
@@ -39,8 +40,8 @@ class Usuario(db.Model):
 
     def __repr__(self):
         return """
-        Usuario(nome={}, email={}, status={}, nivel={}, token={})""".format(
-            self.nome, self.email, self.status, self.nivel, self.token)
+        Usuario(nome={}, username={}, email={}, status={}, nivel={}, token={})""".format(
+            self.nome, self.username, self.email, self.status, self.nivel, self.token)
 
 
 class Conta(db.Model):
