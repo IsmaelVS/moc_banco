@@ -3,6 +3,9 @@
 {% block body %}
   <div class="row">
   	<div class="col-md-7 offset-md-2"></br>
+      <div class="col-md-8 offset-md-2" align="center">
+        <img src="{{ url_for('static', filename='bank.png')}}" alt="MOC Banco" width=200 height=180>
+      </div></br>
 		<form action="/login/" method="get">
             <input type="submit" class="btn btn-block btn-success" value="Logar" name="Submit"/>
         </form>
