@@ -24,14 +24,12 @@ def checar_cadastro():
     """Rota inicial para checar cadastro de credenciado."""
     form = FormCadastro(request.form)
 
+    if not form.validate_on_submit():
+        return render_template('cadastro.html', form=form)
     if checar_usuario_existente(form.nome.data, form.email.data):
         return render_template('cadastro.html', form=form, email=True), 400
-    token = criar_usuario(form.nome.data, form.senha.data, form.email.data, 1)
+    token = criar_usuario(form.nome.data, form.username.data, form.senha.data, form.email.data, 1)
     if enviar_token(form.email.data, token):
         logout_user()
         return render_template('ativar_cadastro.html', form=form)
     return render_template('cadastro.html', form=form, falha_email=True), 400
-
-    if not form.validate_on_submit():
-        return render_template('cadastro.html', form=form)
-    return render_template('ativar_cadastro.html')
