@@ -29,8 +29,11 @@ class FormLogin(FlaskForm):
 class FormAtivarCadastro(FlaskForm):
     username = TextField('Digite seu username ou seu email.',
                          validators=[InputRequired()])
-    token = PasswordField('Digite o número do token recebido.',
-                          validators=[InputRequired(), Length(max=5)])
+    token = TextField('Digite o número do token recebido.',
+                      validators=[InputRequired(),
+                        Length(
+                            max=5, min=5,
+                            message='Seu token deve conter 5 caracteres.')])
     ativar = SubmitField('Ativar conta')
 
 
