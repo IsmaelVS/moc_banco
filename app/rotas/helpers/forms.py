@@ -22,7 +22,7 @@ class FormLogin(FlaskForm):
     username = TextField('Digite seu username ou seu email.',
                          validators=[InputRequired()])
     senha = PasswordField('Digite sua senha.',
-                          validators=[InputRequired(), Length(min=6)])
+                          validators=[InputRequired()])
     logar = SubmitField('Logar')
 
 
