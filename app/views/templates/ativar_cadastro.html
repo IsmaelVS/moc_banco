@@ -1,25 +1,29 @@
 {% extends 'basic.jinja2' %}
-
+{% import "bootstrap/wtf.html" as wtf %}
 {% block body %}
   <div class="row">
   	<div class="col-md-7 offset-md-2">
+      <h1>Ativação de cadastro</h1>
+      <hr>
 			<form action="/ativar/checar" method=post>
-				<div class="form-group">
-      		<label for="email">Digite seu e-mail</label>
-  				<input type="email" id="email" required name="email" class="form-control" />
-  			</div>
-  			<div class="form-group">
-      		<label for="token">Digite o token recebido</label>
-  				<input type="text" id="token" required name="token" class="form-control" maxlength="5" />
-  			</div>
-            {% if token %}
+        {{ form.csrf_token }}
+				{{ wtf.form_field(form.username, class='form-control', placeholder='Mano Brown ou mano.brown@racionais.com') }}
+        {{ wtf.form_field(form.token, class='form-control', placeholder='00000') }}
+        </br>
+        {{ wtf.form_field(form.ativar, class='btn btn-block btn-success') }}
+        </br>
+        <div align="center">
+          {% if token %}
             <span>Token inválido, verifique e tente novamente!</span>
-            {% endif %}
-            {% if user %}
-            <span>Email inválido!</span>
-            {% endif %}
-  			<button type="submit" class="btn btn-block btn-success">Ativar conta</button>
-  		</form>
-  	</div>
+          {% endif %}
+          {% if user %}
+            <span>Username ou Email inválido! verifique e digite novamente.</span>
+          {% endif %}
+          {% if ativado %}
+            <span>Username já validado! Só basta realizar o login.</span>
+          {% endif %}
+        </div>
+      </form>
+    </div>
   </div>
 {% endblock %}
