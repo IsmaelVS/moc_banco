@@ -21,7 +21,7 @@ def validar_login(username, senha):
         senha: Senha do usuário.
 
     Returns:
-        bool: Retorna True se login correto, se não False.
+        bool: Retorna instância do banco se login correto, se não False.
     """
     user_username = db.session.query(Usuario).filter_by(
         username=username.lower()).first()
@@ -34,8 +34,27 @@ def validar_login(username, senha):
     elif user_email:
         return user_email if check_password_hash(
             user_email.senha, senha) else False
-    else:
-        False
+    return False
+
+def verificar_email_e_username(username):
+    """Função verificar se email ou username digitado é válido.
+
+    Args:
+        username: Username ou email do usuário.
+
+    Returns:
+        bool: Retorna instância do banco se login correto, se não False.
+    """
+    user_username = db.session.query(Usuario).filter_by(
+        username=username.lower()).first()
+    user_email = db.session.query(Usuario).filter_by(
+        email=username).first()
+
+    if user_username:
+        return user_username
+    elif user_email:
+        return user_email
+    return False
 
 
 def gerar_uuid(email):
