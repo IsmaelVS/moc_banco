@@ -1,25 +1,26 @@
 {% extends 'basic.jinja2' %}
-
+{% import "bootstrap/wtf.html" as wtf %}
 {% block body %}
   <div class="row">
   	<div class="col-md-7 offset-md-2">
-  		<form action="/login/checar" method=post>
-  		  <div class="form-group">
-      		<label for="nome">Usuário</label>
-  				<input type="text" id="nome" required name="nome" title="Digitar seu nome" class="form-control" />
-  			</div>
-  			<div class="form-group">
-      		<label for="senha">Senha</label>
-  				<input type="password" id="senha" required name="senha" title="Digitar sua senha" class="form-control" />
-  			</div>
+        <h1>Login</h1>
+        <hr>
+        <form action="/login/checar" method=post>
+          {{ form.csrf_token() }}
+          {{ wtf.form_field(form.username, class='form-control', placeholder='Ismailov ou isma@love.com') }}
+          {{ wtf.form_field(form.senha, class='form-control', placeholder='******') }}
+          </br>
+          {{ wtf.form_field(form.logar, class='btn btn-block btn-success') }}
+          </br>
+          <div align="center">
             {% if invalid %}
               <span>Nome ou senha incorreta, tente novamente!</span>
             {% endif %}
             {% if status %}
               <span>Usuário não ativo, realize a ativação antes!</span>
             {% endif %}
-  			<button type="submit" title="Clique para realizar o login" class="btn btn-block btn-success">Logar</button>
-  		</form>
+          </div>
+        </form>
   	</div>
   </div>
 {% endblock %}
