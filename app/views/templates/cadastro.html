@@ -18,6 +18,12 @@
       {{ wtf.form_field(form.email, class='form-control', placeholder='mano.brown@racionais.com') }}
       {{ wtf.form_field(form.senha, class='form-control', placeholder='******') }}
       {{ wtf.form_field(form.cadastrar, class='btn btn-block btn-success') }}
+      </br>
+      <div align="center">
+        {% if email %}
+          <span>Usuario existente!</span>
+        {% endif %}
+      </div>
   		</form>
   	</div>
   </div>
