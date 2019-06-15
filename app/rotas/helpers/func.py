@@ -13,23 +13,29 @@ from app.database.tabelas import Conta, Extrato, Usuario, db
 from flask_login import current_user
 
 
-def validar_login(nome, senha):
+def validar_login(username, senha):
     """Função de validação de login de acordo com os dados do formulário.
 
     Args:
-        nome: Nome do usuário.
+        username: Username ou email do usuário.
         senha: Senha do usuário.
 
     Returns:
         bool: Retorna True se login correto, se não False.
     """
-    user = db.session.query(Usuario).filter_by(
-        nome=nome).first()
-    if user:
-        check_pwd = check_password_hash(user.senha, senha)
-        if check_pwd:
-            return user
-        return False
+    user_username = db.session.query(Usuario).filter_by(
+        username=username.lower()).first()
+    user_email = db.session.query(Usuario).filter_by(
+        email=username).first()
+
+    if user_username:
+        return user_username if check_password_hash(
+            user_username.senha, senha) else False
+    elif user_email:
+        return user_email if check_password_hash(
+            user_email.senha, senha) else False
+    else:
+        False
 
 
 def gerar_uuid(email):
@@ -98,6 +104,15 @@ def adic_dinheiro(saldo):
     conta.saldo += saldo
     db.session.commit()
     return conta
+
+
+def pegar_conta(usuario):
+    """Função para pegar numero da conta.
+
+    Returns:
+        conta.
+    """
+    return Conta.query.filter_by(usuario=usuario).first().conta
 
 
 def criar_usuario(nome, username, senha, email, nivel):
